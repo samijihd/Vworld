@@ -34,7 +34,7 @@
         android:layout_marginEnd="200dp"
         android:layout_marginBottom="8dp"
         android:text="Register"
-        android:textColor="#FFF"
+        android:textColor="@color/red"
         android:textSize="15sp"
         android:textStyle="normal" />
 
