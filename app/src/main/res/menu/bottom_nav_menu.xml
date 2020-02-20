@@ -2,18 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/msgID"
         android:icon="@drawable/messages"
         android:title="Messages" />
     <item
+        android:id="@+id/projectID"
         android:icon="@drawable/folder"
         android:title="My Projects" />
     <item
+        android:id="@+id/postID"
         android:icon="@drawable/post"
         android:title="Post" />
     <item
+        android:id="@+id/browseID"
         android:icon="@drawable/search"
         android:title="Browse" />
     <item
+        android:id="@+id/accountID"
         android:icon="@drawable/person"
         android:title="Account" />
 </menu>
