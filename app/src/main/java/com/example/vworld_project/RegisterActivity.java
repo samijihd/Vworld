@@ -8,10 +8,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private ImageView back;
     private TextView login;
+
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         back = findViewById(R.id.back_ID);
         login = findViewById(R.id.loginlink_ID);
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

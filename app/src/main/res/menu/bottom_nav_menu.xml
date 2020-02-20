@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:icon="@drawable/messages"
+        android:title="Messages" />
+    <item
+        android:icon="@drawable/folder"
+        android:title="My Projects" />
+    <item
+        android:icon="@drawable/post"
+        android:title="Post" />
+    <item
+        android:icon="@drawable/search"
+        android:title="Browse" />
+    <item
+        android:icon="@drawable/person"
+        android:title="Account" />
+</menu>
