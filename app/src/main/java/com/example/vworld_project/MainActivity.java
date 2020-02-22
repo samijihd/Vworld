@@ -8,9 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button btnlogin;
+
+    private FirebaseAuth auth;
 
     private TextView btnRegister;
 
@@ -18,6 +23,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+
+        if(user != null){
+            startActivity(new Intent(MainActivity.this , HomeActivity.class));
+            finish();
+        }
 
         btnlogin = findViewById(R.id.login_ID);
         btnRegister = findViewById(R.id.register_ID);

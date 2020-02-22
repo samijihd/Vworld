@@ -5,10 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".AccountFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="account" />
+        android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/signoutID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="88dp"
+            android:textColor="#FFF"
+            android:textSize="20dp"
+            android:text="Sign Out"
+            android:background="@color/red"/>
+    </RelativeLayout>
 </FrameLayout>

@@ -6,17 +6,57 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.accounts.Account;
+import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private FirebaseAuth auth;
+    public Button signout;
+
+    /*
+optioins menu items
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuinf = getMenuInflater();
+        menuinf.inflate(R.menu.home_options_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.signout){
+            auth.signOut();
+            startActivity(new Intent(HomeActivity.this , LoginActivity.class));
+        }
+            return super.onOptionsItemSelected(item);
+    }
+*/
+    /*public void setSignout(FirebaseAuth auth){
+        auth.signOut();
+        startActivity(new Intent(this , LoginActivity.class));
+        finish();
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        auth = FirebaseAuth.getInstance();
 
         BottomNavigationView nav_View = findViewById(R.id.bottom_nav);
 
@@ -24,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
         final MyprojectsFragment myprojectfragment = new MyprojectsFragment();
         final PostFragment postFragment = new PostFragment();
         final BrowseFragment browsefragment = new BrowseFragment();
-        final AccountFragment accountfragment = new AccountFragment();
+        final AccountFragment accountFragment = new AccountFragment();
 
         setFragment(msgfragment);
 
@@ -33,25 +73,33 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
 
-                if(id == R.id.msgID){
-                    setFragment(msgfragment);
-                    return true;
+
+                try {
+                    if(id == R.id.msgID){
+                        setFragment(msgfragment);
+                        return true;
+                    }
+                    else if(id == R.id.projectID){
+                        setFragment(myprojectfragment);
+                        return  true;
+                    }
+                    else if(id == R.id.postID){
+                        setFragment(postFragment);
+                        return true;
+                    }
+                    else if(id == R.id.browseID){
+                        setFragment(browsefragment);
+                        return true;
+                    }
+                    else if(id == R.id.accountID){
+                        setFragment(accountFragment);
+                        return true;
+                    }
+                    return false;
+
                 }
-                else if(id == R.id.projectID){
-                    setFragment(myprojectfragment);
-                    return  true;
-                }
-                else if(id == R.id.postID){
-                    setFragment(postFragment);
-                    return true;
-                }
-                else if(id == R.id.browseID){
-                    setFragment(browsefragment);
-                    return true;
-                }
-                else if(id == R.id.accountID){
-                    setFragment(accountfragment);
-                    return true;
+                catch (Exception e){
+                    Toast.makeText(HomeActivity.this , e.getLocalizedMessage().toString() , Toast.LENGTH_LONG).show();
                 }
                 return false;
             }
@@ -60,7 +108,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frameID , fragment);
+        fragmentTransaction.replace(R.id.frameID , fragment); //.commit(); you can write the next line here
         fragmentTransaction.commit();
     }
+
 }

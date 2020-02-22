@@ -1,7 +1,5 @@
 package com.example.vworld_project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,11 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import org.w3c.dom.Text;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -42,6 +43,13 @@ public class LoginActivity extends AppCompatActivity {
 
         login = findViewById(R.id.loginbtn_ID);
         auth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = auth.getCurrentUser();
+
+       /* if(user != null){
+            startActivity(new Intent(LoginActivity.this , HomeActivity.class));
+            finish();
+        }*/
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -92,9 +100,16 @@ public class LoginActivity extends AppCompatActivity {
         auth.signInWithEmailAndPassword(email , password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
+
                 Toast.makeText(LoginActivity.this , "login sccessfull" , Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LoginActivity.this , HomeActivity.class));
                 finish();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(LoginActivity.this, e.getLocalizedMessage().toString(), Toast.LENGTH_LONG).show();
             }
         });
     }
