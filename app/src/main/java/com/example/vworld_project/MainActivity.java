@@ -20,9 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView btnRegister;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void onStart() {
+        super.onStart();
 
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
@@ -31,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this , HomeActivity.class));
             finish();
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
 
         btnlogin = findViewById(R.id.login_ID);
         btnRegister = findViewById(R.id.register_ID);
