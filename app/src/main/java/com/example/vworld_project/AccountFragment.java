@@ -94,6 +94,7 @@ public class AccountFragment extends Fragment {
                 auth.signOut();
                 //Toast.makeText(getActivity() , "logged out" , Toast.LENGTH_LONG);
                 startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext() , LoginActivity.class));
+                getActivity().finish();
             }
         });
 

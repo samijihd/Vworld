@@ -14,6 +14,11 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     private Button btnlogin;
+    public static boolean k = false;
+
+    public void setKey(boolean key){
+        this.k = key;
+    }
 
     private FirebaseAuth auth;
 

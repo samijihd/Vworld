@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,11 +22,14 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public static FirebaseUser user_log = null;
+
     private ImageView back;
     private TextView register;
 
     private EditText email;
     private EditText password;
+    public static CheckBox remember;
 
     private Button login;
     private FirebaseAuth auth;
@@ -40,16 +44,26 @@ public class LoginActivity extends AppCompatActivity {
 
         email = findViewById(R.id.user_reg_ID);
         password = findViewById(R.id.pass_reg_ID);
+        remember = findViewById(R.id.remember_ID);
 
         login = findViewById(R.id.signupbtn_reg_ID);
         auth = FirebaseAuth.getInstance();
 
         FirebaseUser user = auth.getCurrentUser();
 
+
        /* if(user != null){
             startActivity(new Intent(LoginActivity.this , HomeActivity.class));
             finish();
         }*/
+
+       /*if (remember.isChecked()){
+           user_log = user;
+           Intent intent = new Intent(getBaseContext(), MainActivity.class);
+           intent.putExtra("user_log" , user_log);
+       }else{
+           user_log = null;
+       }*/
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +126,10 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, e.getLocalizedMessage().toString(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public boolean setKey(boolean key){
+        return key;
     }
 
 }
