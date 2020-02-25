@@ -7,15 +7,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="200dp"
         android:id="@+id/Account_header"
+        android:background="@drawable/lines"
         >
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="30dp"
             android:src="@mipmap/ic_launcher"
             android:id="@+id/profile_img"
             />
@@ -24,13 +25,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:textColor="#000"
-            android:layout_marginStart="10dp"
+            android:textColor="#FFF"
+            android:layout_marginStart="30dp"
+            android:text="name name"
+            android:textSize="28sp"
+            android:id="@+id/name_profile"
+            android:layout_below="@+id/profile_img"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="@color/gray"
+            android:layout_marginStart="30dp"
             android:text="@string/username"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:id="@+id/username"
-            android:layout_toRightOf="@id/profile_img"
-            android:layout_toEndOf="@id/profile_img"
+            android:layout_below="@+id/name_profile"
             />
 
     </RelativeLayout>
@@ -39,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray"
-        android:layout_marginTop="70dp">
+        android:layout_marginTop="200dp">
 
         <Button
             android:id="@+id/signoutID"

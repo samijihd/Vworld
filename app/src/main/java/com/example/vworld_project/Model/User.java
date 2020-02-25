@@ -3,13 +3,15 @@ package com.example.vworld_project.Model;
 public class User {
 
     private String id;
+    private String name;
     private String username;
     private String imageURL;
     private String status;
     private String search;
 
-    public User(String id, String username, String imageURL, String status, String search) {
+    public User(String id,String name, String username, String imageURL, String status, String search) {
         this.id = id;
+        this.name = name;
         this.username = username;
         this.imageURL = imageURL;
         this.status = status;
@@ -26,6 +28,14 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUsername() {

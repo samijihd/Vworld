@@ -129,6 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
                         //create hash map and insert it to realtime db
                         HashMap<String, String> hashMap = new HashMap<>();
                         hashMap.put("id", userid);
+                        hashMap.put("name", user);
                         hashMap.put("username", user);
                         hashMap.put("imageURL", "default");
 

@@ -1,6 +1,7 @@
 package com.example.vworld_project;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.vworld_project.Model.User;
@@ -35,6 +37,7 @@ public class AccountFragment extends Fragment {
 
     private CircleImageView profile_image;
     private TextView username;
+    private TextView name;
 
     private Button signout;
     private FirebaseAuth auth;
@@ -58,6 +61,7 @@ public class AccountFragment extends Fragment {
         signout = viewGroup.findViewById(R.id.signoutID);
         profile_image = viewGroup.findViewById(R.id.profile_img);
         username = viewGroup.findViewById(R.id.username);
+        name = viewGroup.findViewById(R.id.name_profile);
 
         auth = FirebaseAuth.getInstance();
         firebaseUser = auth.getCurrentUser();
@@ -65,11 +69,13 @@ public class AccountFragment extends Fragment {
         reference = firebaseDatabase.getReference("Users").child(firebaseUser.getUid());
 
         reference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 assert user != null;
-                username.setText(user.getUsername());
+                name.setText(user.getName());
+                username.setText("@"+user.getUsername());
 
                 if (user.getImageURL().equals("default")){
                     profile_image.setImageResource(R.mipmap.ic_launcher);
@@ -92,7 +98,7 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 auth.signOut();
-                //Toast.makeText(getActivity() , "logged out" , Toast.LENGTH_LONG);
+                Toast.makeText(getActivity() , "logged out" , Toast.LENGTH_LONG);
                 startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext() , LoginActivity.class));
                 getActivity().finish();
             }
