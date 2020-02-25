@@ -36,8 +36,8 @@ public class BrowseFragment extends Fragment {
 
     private FirebaseAuth auth;
     private FirebaseUser firebaseUser;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference reference;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference reference;
 
     private List<User> mUser;
 
@@ -53,6 +53,7 @@ public class BrowseFragment extends Fragment {
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_browse, container, false);
 
         recyclerView = viewGroup.findViewById(R.id.recycle_user);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

@@ -6,34 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-
     <TextView
         android:id="@+id/register_ID"
-        android:layout_width="66dp"
-        android:layout_height="29dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="270dp"
-        android:layout_marginEnd="93dp"
-        android:layout_marginBottom="4dp"
-        android:text="Register"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="6dp"
+        android:text="@string/register"
         android:textColor="#AA3939"
+        android:layout_toEndOf="@+id/textView6"
         android:textSize="15sp"
         android:textStyle="normal" />
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="80dp"
-        android:layout_height="27dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="110dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="100dp"
+        android:textAlignment="center"
         android:layout_marginBottom="6dp"
-        android:text="You are not a member?"
-        android:textSize="15sp" />
+        android:text="@string/you_are_not_a_member"
+        android:textSize="15sp"/>
+
 
     <TextView
         android:id="@+id/forget_ID"
@@ -41,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="565dp"
         android:layout_centerHorizontal="true"
-        android:text="Forget password?"
+        android:text="@string/forget_password"
         android:textAlignment="center"
         android:textColor="#933131"
         android:textSize="16sp"
@@ -92,7 +88,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="175dp"
             android:layout_marginBottom="97dp"
-            android:text="Hello There!"
+            android:text="@string/hello_there"
             android:textAlignment="center"
             android:textColor="#FFF"
             android:textSize="30sp"
@@ -117,11 +113,12 @@
             android:layout_marginTop="50dp"
             android:background="@drawable/login_txt_edit"
             android:ems="10"
-            android:hint="Email Address"
+            android:hint="@string/email_address"
             android:inputType="textEmailAddress"
             android:paddingStart="10dp"
             android:textColorHint="#384E53"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="RtlSymmetry" />
 
         <EditText
             android:id="@+id/pass_reg_ID"
@@ -132,11 +129,12 @@
             android:layout_marginTop="120dp"
             android:background="@drawable/login_txt_edit"
             android:ems="10"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:paddingStart="10dp"
             android:textColorHint="#384E53"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="RtlSymmetry" />
 
         <CheckBox
             android:id="@+id/remember_ID"
@@ -145,7 +143,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="185dp"
             android:layout_marginEnd="31dp"
-            android:text="Remember Me?"
+            android:text="@string/remember_me"
             android:textColor="#384E53"
             android:textColorHighlight="@color/mainBackground"
             android:textColorLink="@color/mainBackground"
@@ -158,7 +156,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="240dp"
             android:background="@drawable/btn_login"
-            android:text="Log In"
+            android:text="@string/log_in"
             android:textColor="#FFF"
             android:textSize="20sp" />
 

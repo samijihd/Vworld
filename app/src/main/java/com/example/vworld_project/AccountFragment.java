@@ -23,6 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -91,7 +93,7 @@ public class AccountFragment extends Fragment {
             public void onClick(View view) {
                 auth.signOut();
                 //Toast.makeText(getActivity() , "logged out" , Toast.LENGTH_LONG);
-                startActivity(new Intent(getActivity().getApplicationContext() , LoginActivity.class));
+                startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext() , LoginActivity.class));
             }
         });
 

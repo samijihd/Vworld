@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="80dp"
     android:padding="10dp"
     >
 
@@ -10,6 +10,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@mipmap/ic_launcher"
+        android:layout_centerVertical="true"
         android:id="@+id/profile_img"
         />
 
@@ -23,9 +24,18 @@
         android:layout_toEndOf="@id/profile_img"
         android:layout_marginLeft="10dp"
         android:layout_centerVertical="true"
+        android:textColor="#000"
         android:textSize="18sp"
         />
 
+    <View
+        android:id="@+id/divider"
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:layout_below="@+id/profile_img"
+        android:background="#0078D7" />
 
 
 </RelativeLayout>
