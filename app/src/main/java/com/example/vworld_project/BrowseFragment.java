@@ -1,6 +1,7 @@
 package com.example.vworld_project;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.vworld_project.Adapter.UserAdapter;
 import com.example.vworld_project.Model.User;
@@ -24,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -33,6 +37,8 @@ public class BrowseFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
+
+    private ImageView toChat;
 
     private FirebaseAuth auth;
     private FirebaseUser firebaseUser;
@@ -53,6 +59,7 @@ public class BrowseFragment extends Fragment {
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_browse, container, false);
 
         recyclerView = viewGroup.findViewById(R.id.recycle_user);
+        toChat = viewGroup.findViewById(R.id.to_chats);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -63,6 +70,13 @@ public class BrowseFragment extends Fragment {
         mUser = new ArrayList<>();
         readUsers();
 
+        /*toChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity() , MessageActivity.class));
+            }
+        });
+*/
         return viewGroup;
     }
 

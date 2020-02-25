@@ -98,12 +98,11 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 auth.signOut();
-                Toast.makeText(getActivity() , "logged out" , Toast.LENGTH_LONG);
                 startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext() , LoginActivity.class));
+                Toast.makeText(getActivity() , "logged out" , Toast.LENGTH_LONG);
                 getActivity().finish();
             }
         });
-
         return viewGroup;
     }
 }
