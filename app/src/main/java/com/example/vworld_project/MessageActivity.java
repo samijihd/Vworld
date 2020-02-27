@@ -73,7 +73,7 @@ public class MessageActivity extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String msg = message_text.getText().toString();
+                String msg = message_text.getText().toString().trim();
                 if(!msg.equals("")){
                     sendMessage(msg, firebaseUser.getUid(), userid);
                 }
@@ -122,7 +122,7 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
-    private void sendMessage(String message, String sender, String receiver){
+    private void sendMessage(String message, String sender, String receiver) {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
@@ -132,6 +132,7 @@ public class MessageActivity extends AppCompatActivity {
         map.put("receiver", receiver);
 
         reference.child("Messages").push().setValue(map);
+
     }
 
     public void readMessages(final String myid, final String userid, final String imageurl){

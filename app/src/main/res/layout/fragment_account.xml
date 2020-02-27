@@ -6,32 +6,29 @@
     tools:context=".AccountFragment">
 
     <RelativeLayout
+        android:id="@+id/Account_header"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:id="@+id/Account_header"
-        android:background="@drawable/lines"
-        >
+        android:background="@drawable/lines">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_img"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="25dp"
             android:layout_marginStart="30dp"
-            android:src="@mipmap/ic_launcher"
-            android:id="@+id/profile_img"
-            />
+            android:layout_marginTop="25dp"
+            android:src="@mipmap/ic_launcher" />
 
         <TextView
+            android:id="@+id/name_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_img"
             android:layout_centerVertical="true"
-            android:textColor="#FFF"
             android:layout_marginStart="30dp"
             android:text="name name"
-            android:textSize="28sp"
-            android:id="@+id/name_profile"
-            android:layout_below="@+id/profile_img"
-            />
+            android:textColor="#FFF"
+            android:textSize="28sp" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="30dp"
@@ -42,16 +39,15 @@
             android:src="@drawable/setting_icon" />
 
         <TextView
+            android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/name_profile"
             android:layout_centerVertical="true"
-            android:textColor="@color/gray"
             android:layout_marginStart="30dp"
             android:text="@string/username"
-            android:textSize="16sp"
-            android:id="@+id/username"
-            android:layout_below="@+id/name_profile"
-            />
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
 
     </RelativeLayout>
 

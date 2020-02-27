@@ -3,37 +3,115 @@ package com.example.vworld_project;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.vworld_project.Adapter.UserAdapter;
+import com.example.vworld_project.Model.Message;
+import com.example.vworld_project.Model.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class MessagesFragment extends Fragment {
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private RecyclerView recyclerView;
 
+    FirebaseAuth auth;
+    FirebaseUser firebaseUser;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference reference;
 
+    private UserAdapter userAdapter;
+    private List<User> mUsers;
 
-    public MessagesFragment() {
-        // Required empty public constructor
-    }
-
+    private List<String> usersList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_messages, container, false);
 
+        recyclerView = viewGroup.findViewById(R.id.recycle_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        auth = FirebaseAuth.getInstance();
+        firebaseUser = auth.getCurrentUser();
+
+        usersList = new ArrayList<>();
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        reference =  firebaseDatabase.getReference("Messages");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                usersList.clear();
+
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    Message message = snapshot.getValue(Message.class);
+
+                    assert message != null;
+                    if (message.getSender().equals(firebaseUser.getUid())){
+                        usersList.add(message.getReceiver());
+                    }
+                    if (message.getReceiver().equals(firebaseUser.getUid())){
+                        usersList.add(message.getSender());
+                    }
+                }
+                readMessages();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         return viewGroup;
+    }
+
+    private void readMessages(){
+        mUsers = new ArrayList<>();
+        // bir kullanici gostermek icin
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        reference = firebaseDatabase.getReference("Users");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mUsers.clear();
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    User user = snapshot.getValue(User.class);
+                    for (String id : usersList){
+                        assert user != null;
+                        if (user.getId().equals(id)){
+                            mUsers.add(user);
+                        }
+                    }
+                }
+                userAdapter = new UserAdapter(getContext(), mUsers);
+                recyclerView.setAdapter(userAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }
