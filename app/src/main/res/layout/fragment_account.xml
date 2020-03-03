@@ -9,7 +9,7 @@
         android:id="@+id/Account_header"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@drawable/lines">
+        android:background="@drawable/cir">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_img"
@@ -17,7 +17,7 @@
             android:layout_height="100dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="25dp"
-            android:src="@mipmap/ic_launcher" />
+             />
 
         <TextView
             android:id="@+id/name_profile"
@@ -55,6 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray"
+        android:padding="10dp"
         android:layout_marginTop="200dp">
 
         <Button
@@ -62,11 +63,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="29dp"
             android:background="@color/red"
             android:text="Sign Out"
             android:textColor="#FFF"
             android:textSize="20dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_centerHorizontal="true">
+
+            <RelativeLayout
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/basligi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="About"
+                    android:layout_marginStart="10dp"
+                    android:textSize="24sp"
+                    android:textColor="#000"
+                    />
+
+                <TextView
+                    android:id="@+id/pio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/basligi"
+                    android:textColor="#6C6C6C"
+                    android:padding="5dp"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 </FrameLayout>

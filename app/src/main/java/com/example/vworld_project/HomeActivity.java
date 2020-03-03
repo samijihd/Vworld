@@ -19,11 +19,20 @@ import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     public Button signout;
+
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseUser firebaseUser;
+    private DatabaseReference reference;
 
     /*
 optioins menu items
@@ -57,6 +66,9 @@ optioins menu items
         setContentView(R.layout.activity_home);
 
         auth = FirebaseAuth.getInstance();
+        firebaseUser = auth.getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        reference = firebaseDatabase.getReference("Users").child(firebaseUser.getUid());
 
         BottomNavigationView nav_View = findViewById(R.id.bottom_nav);
 
@@ -104,6 +116,7 @@ optioins menu items
                 return false;
             }
         });
+
     }
 
     private void setFragment(Fragment fragment){
@@ -112,4 +125,24 @@ optioins menu items
         fragmentTransaction.commit();
     }
 
+    private void status(String status){
+        reference = firebaseDatabase.getReference("Users").child(firebaseUser.getUid());
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("status", status);
+
+        reference.updateChildren(map);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
+    }
 }
