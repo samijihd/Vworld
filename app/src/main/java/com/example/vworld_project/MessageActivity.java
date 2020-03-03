@@ -115,8 +115,8 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //startActivity(new Intent(MessageActivity.this , HomeActivity.class));
-               /* startActivity(new Intent(MessageActivity.this, HomeActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));*/
+               startActivity(new Intent(MessageActivity.this, HomeActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 finish();
             }
         });

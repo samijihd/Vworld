@@ -23,9 +23,14 @@
         android:layout_height="60dp">
 
 
-        <SearchView
+        <EditText
+            android:id="@+id/search_users"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:hint="Search..."
+            android:textSize="18sp"
             />
     </RelativeLayout>
 

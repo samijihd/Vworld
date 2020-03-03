@@ -23,10 +23,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private Context mContext;
     private List<User> mUsers;
+    private boolean isChat;
 
-    public UserAdapter(Context mContext, List<User> mUsers){
+    public UserAdapter(Context mContext, List<User> mUsers, boolean isChat){
         this.mContext = mContext;
         this.mUsers = mUsers;
+        this.isChat = isChat;
     }
 
     @NonNull
@@ -47,6 +49,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             Glide.with(mContext).load(user.getImageURL()).into(holder.profile_image);
         }
 
+        if (isChat){
+            if (user.getStatus().equals("online")){
+                holder.on_img.setVisibility(View.VISIBLE);
+                holder.off_img.setVisibility(View.GONE);
+            }
+            else {
+                holder.on_img.setVisibility(View.GONE);
+                holder.off_img.setVisibility(View.VISIBLE);
+            }
+        } else {
+            holder.on_img.setVisibility(View.GONE);
+            holder.off_img.setVisibility(View.GONE);
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +71,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 mContext.startActivity(intent);
             }
         });
-
 
     }
 
@@ -68,12 +83,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
         public ImageView profile_image;
         public TextView username;
+        private ImageView on_img, off_img;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             username = itemView.findViewById(R.id.username_browse);
             profile_image = itemView.findViewById(R.id.profile_img);
+            on_img = itemView.findViewById(R.id.on_img);
+            off_img = itemView.findViewById(R.id.off_img);
         }
     }
 }

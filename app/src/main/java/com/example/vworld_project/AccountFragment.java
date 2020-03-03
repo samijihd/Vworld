@@ -126,9 +126,8 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 auth.signOut();
-                startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext() , LoginActivity.class));
+                startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext() , LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 Toast.makeText(getActivity() , "logged out" , Toast.LENGTH_LONG);
-                getActivity().finish();
             }
         });
         return viewGroup;
