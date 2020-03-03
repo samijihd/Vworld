@@ -104,7 +104,7 @@ public class AccountFragment extends Fragment {
                 }
                 else{
                     //maybe getActivity() cause issues --changing with HomeActivity.this not a good solution!
-                    Glide.with(getContext()).load(user.getImageURL()).into(profile_image);
+                    Glide.with(Objects.requireNonNull(getContext())).load(user.getImageURL()).into(profile_image);
                 }
             }
 
@@ -128,6 +128,7 @@ public class AccountFragment extends Fragment {
                 auth.signOut();
                 startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext() , LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 Toast.makeText(getActivity() , "logged out" , Toast.LENGTH_LONG);
+                getActivity().finish();
             }
         });
         return viewGroup;

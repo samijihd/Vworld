@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,6 +40,7 @@ public class MessageActivity extends AppCompatActivity {
 
     MessageAdapter messageAdapter;
     List<Message> mMessage;
+    String userid;
 
     FirebaseAuth auth;
     FirebaseUser firebaseUser;
@@ -64,7 +66,7 @@ public class MessageActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         Intent intent = getIntent();
-        final String userid = intent.getStringExtra("userid");
+        userid = intent.getStringExtra("userid");
 
         auth = FirebaseAuth.getInstance();
         firebaseUser = auth.getCurrentUser();
@@ -122,7 +124,7 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
-    private void sendMessage(String message, String sender, String receiver) {
+    private void sendMessage(String message, String sender, final String receiver) {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
@@ -132,6 +134,23 @@ public class MessageActivity extends AppCompatActivity {
         map.put("receiver", receiver);
 
         reference.child("Messages").push().setValue(map);
+
+        final DatabaseReference chatref = FirebaseDatabase.getInstance().getReference("Chatlist")
+                .child(firebaseUser.getUid())
+                .child(userid);
+        chatref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()){
+                    chatref.child("id").setValue(userid);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 

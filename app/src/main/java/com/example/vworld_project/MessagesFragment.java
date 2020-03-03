@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vworld_project.Adapter.UserAdapter;
+import com.example.vworld_project.Model.Chatlist;
 import com.example.vworld_project.Model.Message;
 import com.example.vworld_project.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,7 +40,7 @@ public class MessagesFragment extends Fragment {
     private UserAdapter userAdapter;
     private List<User> mUsers;
 
-    private List<String> usersList;
+    private List<Chatlist> usersList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +56,60 @@ public class MessagesFragment extends Fragment {
 
         usersList = new ArrayList<>();
 
+        reference = FirebaseDatabase.getInstance().getReference("Chatlist").child(firebaseUser.getUid());
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                usersList.clear();
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Chatlist chatlist = snapshot.getValue(Chatlist.class);
+                    usersList.add(chatlist);
+                }
+                chatList();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+
+        return viewGroup;
+    }
+
+    private void chatList() {
+        mUsers = new ArrayList<>();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mUsers.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    User user = snapshot.getValue(User.class);
+                    for (Chatlist chatlist : usersList){
+                        assert user != null;
+                        if(user.getId().equals(chatlist.getId())){
+                            mUsers.add(user);
+                        }
+                    }
+                }
+                userAdapter = new UserAdapter(getContext(), mUsers, true);
+                recyclerView.setAdapter(userAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+}
+
+
+
+/*
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference =  firebaseDatabase.getReference("Messages");
         reference.addValueEventListener(new ValueEventListener() {
@@ -84,6 +139,9 @@ public class MessagesFragment extends Fragment {
         return viewGroup;
     }
 
+    */
+
+    /*
     private void readMessages(){
         mUsers = new ArrayList<>();
         // bir kullanici gostermek icin
@@ -113,5 +171,6 @@ public class MessagesFragment extends Fragment {
             }
         });
     }
+    }
+*/
 
-}

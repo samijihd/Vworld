@@ -53,9 +53,6 @@ public class BrowseFragment extends Fragment {
     private List<User> mUser;
 
 
-    public BrowseFragment() {
-        // Required empty public constructor
-    }
 
 
     @Override
@@ -153,7 +150,7 @@ public class BrowseFragment extends Fragment {
 
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         User user = snapshot.getValue(User.class);
-
+                        assert user != null;
                         if (!user.getId().equals(firebaseUser.getUid())) {
                             mUser.add(user);
                         }

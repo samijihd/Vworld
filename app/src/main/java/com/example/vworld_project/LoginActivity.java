@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     public static FirebaseUser user_log = null;
 
     private ImageView back;
-    private TextView register;
+    private TextView register, forgetpassword;
 
     private EditText email;
     private EditText password;
@@ -45,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.user_reg_ID);
         password = findViewById(R.id.pass_reg_ID);
         remember = findViewById(R.id.remember_ID);
+        forgetpassword = findViewById(R.id.forget_ID);
+
 
         login = findViewById(R.id.signupbtn_reg_ID);
         auth = FirebaseAuth.getInstance();
@@ -65,6 +67,12 @@ public class LoginActivity extends AppCompatActivity {
            user_log = null;
        }*/
 
+        forgetpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this , ResetPasswordActivity.class));
+            }
+        });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(AuthResult authResult) {
 
-                Toast.makeText(LoginActivity.this , "login sccessfull" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this , "login successfully" , Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LoginActivity.this , HomeActivity.class));
                 finish();
 
