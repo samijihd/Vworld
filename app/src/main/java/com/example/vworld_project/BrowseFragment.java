@@ -9,9 +9,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -37,6 +41,7 @@ public class BrowseFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
+    private EditText search;
 
     private ImageView toChat;
 
@@ -60,6 +65,7 @@ public class BrowseFragment extends Fragment {
 
         recyclerView = viewGroup.findViewById(R.id.recycle_user);
         toChat = viewGroup.findViewById(R.id.to_chats);
+        search = viewGroup.findViewById(R.id.search_users);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -68,7 +74,25 @@ public class BrowseFragment extends Fragment {
         firebaseUser = auth.getCurrentUser();
 
         mUser = new ArrayList<>();
+
         readUsers();
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                searchUsers(charSequence.toString().toLowerCase());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         /*toChat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +102,39 @@ public class BrowseFragment extends Fragment {
         });
 */
         return viewGroup;
+    }
+
+    private void searchUsers(String s) {
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+
+        Query query = firebaseDatabase.getReference("Users").orderByChild("search").startAt(s).endAt(s + "\uf8ff");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mUser.clear();
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    User user = snapshot.getValue(User.class);
+
+                    assert user != null;
+                    assert firebaseUser != null;
+                    if (!user.getId().equals(firebaseUser.getUid())){
+                        mUser.add(user);
+                    }
+                }
+                userAdapter = new UserAdapter(getContext(), mUser, false);
+                recyclerView.setAdapter(userAdapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
     private void readUsers() {
@@ -90,18 +147,21 @@ public class BrowseFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mUser.clear();
+                if (search.getText().toString().equals("")) {
 
-                for (DataSnapshot snapshot:dataSnapshot.getChildren()){
-                    User user =  snapshot.getValue(User.class);
+                    mUser.clear();
 
-                    if(!user.getId().equals(firebaseUser.getUid())){
-                        mUser.add(user);
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        User user = snapshot.getValue(User.class);
+
+                        if (!user.getId().equals(firebaseUser.getUid())) {
+                            mUser.add(user);
+                        }
                     }
-                }
 
-                userAdapter = new UserAdapter(getContext(), mUser, true);
-                recyclerView.setAdapter(userAdapter);
+                    userAdapter = new UserAdapter(getContext(), mUser, false);
+                    recyclerView.setAdapter(userAdapter);
+                }
             }
 
             @Override

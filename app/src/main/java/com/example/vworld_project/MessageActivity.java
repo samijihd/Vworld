@@ -117,7 +117,7 @@ public class MessageActivity extends AppCompatActivity {
                 //startActivity(new Intent(MessageActivity.this , HomeActivity.class));
                startActivity(new Intent(MessageActivity.this, HomeActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                finish();
+                //finish();
             }
         });
     }

@@ -132,6 +132,8 @@ public class RegisterActivity extends AppCompatActivity {
                         hashMap.put("name", user);
                         hashMap.put("username", user);
                         hashMap.put("imageURL", "default");
+                        hashMap.put("status", "offline");
+                        hashMap.put("search", user.toLowerCase());
 
                         //insert hash map to firebase realtime database
                         reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {

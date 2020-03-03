@@ -107,7 +107,7 @@ optioins menu items
                         setFragment(accountFragment);
                         return true;
                     }
-                    return false;
+                    return true;
 
                 }
                 catch (Exception e){
