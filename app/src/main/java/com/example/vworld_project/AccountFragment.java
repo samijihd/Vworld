@@ -45,10 +45,11 @@ import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 public class AccountFragment extends Fragment {
 
-    private CircleImageView profile_image;
+    private CircleImageView profile_image1;
     private TextView username;
     private TextView name;
 
@@ -67,18 +68,13 @@ public class AccountFragment extends Fragment {
     private static final int GALLERY_CODE = 1000;
     private static final int PERMISSION_CODE = 1001;
 
-
-    HomeActivity homeActivity = new HomeActivity();
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_account , container , false);
 
         signout = viewGroup.findViewById(R.id.signoutID);
-        profile_image = viewGroup.findViewById(R.id.profile_img);
+        profile_image1 = viewGroup.findViewById(R.id.profile_img);
         username = viewGroup.findViewById(R.id.username);
         name = viewGroup.findViewById(R.id.name_profile);
 
@@ -91,7 +87,7 @@ public class AccountFragment extends Fragment {
         mStorageRef = storage.getReference("profile_Images");
 
         reference.addValueEventListener(new ValueEventListener() {
-            @SuppressLint("SetTextI18n")
+            @SuppressLint({"SetTextI18n", "RestrictedApi"})
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
@@ -100,11 +96,11 @@ public class AccountFragment extends Fragment {
                 username.setText("@"+user.getUsername());
 
                 if (user.getImageURL().equals("default")){
-                    profile_image.setImageResource(R.mipmap.ic_launcher);
+                    profile_image1.setImageResource(R.mipmap.ic_launcher);
                 }
                 else{
                     //maybe getActivity() cause issues --changing with HomeActivity.this not a good solution!
-                    Glide.with(Objects.requireNonNull(getContext())).load(user.getImageURL()).into(profile_image);
+                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image1);
                 }
             }
 
@@ -114,7 +110,7 @@ public class AccountFragment extends Fragment {
             }
         });
 
-        profile_image.setOnClickListener(new View.OnClickListener() {
+        profile_image1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openImage();
@@ -162,7 +158,7 @@ public class AccountFragment extends Fragment {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                     if (!task.isSuccessful()){
-                        throw task.getException();
+                        throw Objects.requireNonNull(task.getException());
                     }
                     return fileReference.getDownloadUrl();
                 }
@@ -171,6 +167,7 @@ public class AccountFragment extends Fragment {
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()){
                         Uri downloadUri = task.getResult();
+                        assert downloadUri != null;
                         String mUri =   downloadUri.toString();
                         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 

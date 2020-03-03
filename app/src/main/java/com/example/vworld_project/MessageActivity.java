@@ -102,7 +102,7 @@ public class MessageActivity extends AppCompatActivity {
                     profile_image_.setImageResource(R.mipmap.ic_launcher);
                 }
                 else{
-                    Glide.with(MessageActivity.this).load(user.getImageURL()).into(profile_image_);
+                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image_);
                 }
                 readMessages(firebaseUser.getUid(), userid, user.getImageURL());
             }

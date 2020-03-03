@@ -111,7 +111,7 @@ optioins menu items
 
                 }
                 catch (Exception e){
-                    Toast.makeText(HomeActivity.this , e.getLocalizedMessage().toString() , Toast.LENGTH_LONG).show();
+                    Toast.makeText(HomeActivity.this , e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 }
                 return false;
             }
