@@ -90,6 +90,8 @@ public class AccountFragment extends Fragment {
             @SuppressLint({"SetTextI18n", "RestrictedApi"})
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //give the variables in User class values from database
+                //the name of variables must be same as in database
                 User user = dataSnapshot.getValue(User.class);
                 assert user != null;
                 name.setText(user.getName());
@@ -100,6 +102,8 @@ public class AccountFragment extends Fragment {
                 }
                 else{
                     //maybe getActivity() cause issues --changing with HomeActivity.this not a good solution!
+                    //the issue is solved by changing getContext() with getApplicationContext()
+                    //now the app works without issues!--send messages and view profile img and show whom you chat with
                     Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image1);
                 }
             }
@@ -200,8 +204,10 @@ public class AccountFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == GALLERY_CODE && resultCode == RESULT_OK && data != null && data.getData() != null){
+            //get new image uri
             imageUri = data.getData();
 
+            //uploadTask is StorageTask form snapshot
             if (uploadTask != null && uploadTask.isInProgress()){
                 Toast.makeText(getContext(), "Upload...", Toast.LENGTH_SHORT).show();
             }

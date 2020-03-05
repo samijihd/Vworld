@@ -116,10 +116,8 @@ public class MessagesFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 usersList.clear();
-
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Message message = snapshot.getValue(Message.class);
-
                     assert message != null;
                     if (message.getSender().equals(firebaseUser.getUid())){
                         usersList.add(message.getReceiver());
@@ -130,22 +128,18 @@ public class MessagesFragment extends Fragment {
                 }
                 readMessages();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
         return viewGroup;
     }
-
     */
 
     /*
     private void readMessages(){
         mUsers = new ArrayList<>();
         // bir kullanici gostermek icin
-
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {
@@ -164,13 +158,10 @@ public class MessagesFragment extends Fragment {
                 userAdapter = new UserAdapter(getContext(), mUsers, true);
                 recyclerView.setAdapter(userAdapter);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }
     }
 */
-

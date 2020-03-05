@@ -82,7 +82,7 @@
                     android:id="@+id/basligi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="About"
+                    android:text="Bio"
                     android:layout_marginStart="10dp"
                     android:textSize="24sp"
                     android:textColor="#000"

@@ -56,7 +56,8 @@ public class RegisterActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RegisterActivity.this , MainActivity.class));
+                startActivity(new Intent(RegisterActivity.this , ProfileActivity.class));
+                //startActivity(new Intent(RegisterActivity.this , MainActivity.class));
                 finish();
             }
         });
@@ -81,27 +82,27 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this , "Enter a username" , Toast.LENGTH_LONG).show();
                     username.setError("Empty!");
                     username.requestFocus();
-                    return;
+                } else if (username_txt.contains(" ")){
+                    Toast.makeText(RegisterActivity.this , "Username should not contains a space!" , Toast.LENGTH_LONG).show();
+                    username.setError("Username should not contains a space!");
+                    username.requestFocus();
                 }
                 else if(TextUtils.isEmpty(email_txt)){
                     Toast.makeText(RegisterActivity.this , "Enter a email" , Toast.LENGTH_LONG).show();
                     email.setError("Empty!");
                     email.requestFocus();
-                    return;
                 }
                 else if(TextUtils.isEmpty(password_txt) || password_txt.length() < 6){
                     Toast.makeText(RegisterActivity.this , "Make sure that the password is longer than 6 char" ,
                             Toast.LENGTH_LONG).show();
                     password.setError("rewrite password!");
                     password.requestFocus();
-                    return;
                 }
                 else if(!copassword_txt.equals(password_txt)){
                     Toast.makeText(RegisterActivity.this , "the passwords are not same" ,
                             Toast.LENGTH_LONG).show();
                     password.requestFocus();
                     copassowrd.requestFocus();
-                    return;
                 }
                 else {
                     Register(username_txt, email_txt, password_txt);
