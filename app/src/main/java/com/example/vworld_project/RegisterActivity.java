@@ -56,8 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RegisterActivity.this , ProfileActivity.class));
-                //startActivity(new Intent(RegisterActivity.this , MainActivity.class));
+                startActivity(new Intent(RegisterActivity.this , MainActivity.class));
                 finish();
             }
         });
@@ -133,6 +132,8 @@ public class RegisterActivity extends AppCompatActivity {
                         hashMap.put("name", user);
                         hashMap.put("username", user);
                         hashMap.put("imageURL", "default");
+                        hashMap.put("jobtitle", "Job title: N/A");
+                        hashMap.put("address", "Address: N/A");
                         hashMap.put("status", "offline");
                         hashMap.put("search", user.toLowerCase());
 

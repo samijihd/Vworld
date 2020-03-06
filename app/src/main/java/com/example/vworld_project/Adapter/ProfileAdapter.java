@@ -19,14 +19,13 @@ import com.example.vworld_project.ProfileActivity;
 import com.example.vworld_project.R;
 
 import java.util.List;
-
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
+public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
 
     private Context mContext;
     private List<User> mUsers;
     private boolean isChat;
 
-    public UserAdapter(Context mContext, List<User> mUsers, boolean isChat){
+    public ProfileAdapter(Context mContext, List<User> mUsers, boolean isChat){
         this.mContext = mContext;
         this.mUsers = mUsers;
         this.isChat = isChat;
@@ -34,13 +33,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProfileAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.user_item, parent, false);
-        return new UserAdapter.ViewHolder(view);
+        return new ProfileAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProfileAdapter.ViewHolder holder, int position) {
         final User user = mUsers.get(position);
         holder.username.setText(user.getUsername());
 
@@ -67,12 +66,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext , MessageActivity.class);
+                Intent intent = new Intent(mContext , ProfileActivity.class);
                 intent.putExtra("userid" , user.getId());
                 mContext.startActivity(intent);
             }
         });
-
     }
 
     @Override

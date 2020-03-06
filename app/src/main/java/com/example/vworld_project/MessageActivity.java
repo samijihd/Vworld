@@ -65,8 +65,8 @@ public class MessageActivity extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        Intent intent = getIntent();
-        userid = intent.getStringExtra("userid");
+        Intent intent1 = getIntent();
+        userid = intent1.getStringExtra("userid");
 
         auth = FirebaseAuth.getInstance();
         firebaseUser = auth.getCurrentUser();

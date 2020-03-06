@@ -3,102 +3,143 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".AccountFragment">
 
     <RelativeLayout
-        android:id="@+id/Account_header"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/cir">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="25dp"
-             />
-
-        <TextView
-            android:id="@+id/name_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_img"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="30dp"
-            android:text="name name"
-            android:textColor="#FFF"
-            android:textSize="28sp" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/setting_icon" />
-
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/name_profile"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="30dp"
-            android:text="@string/username"
-            android:textColor="@color/gray"
-            android:textSize="16sp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray"
-        android:padding="10dp"
-        android:layout_marginTop="200dp">
+        android:background="@color/white"
+        tools:context=".ProfileActivity">
 
-        <Button
-            android:id="@+id/signoutID"
+        <RelativeLayout
+            android:id="@+id/profile_header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/red"
-            android:text="Sign Out"
-            android:textColor="#FFF"
-            android:textSize="20dp" />
+            android:layout_height="200dp"
+            android:padding="10dp"
+            android:background="@drawable/profile_grad">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_centerHorizontal="true">
+            <ImageView
+                android:id="@+id/signoutID"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/exit"/>
 
             <RelativeLayout
-                android:padding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="180dp"
+                android:layout_alignParentBottom="true">
 
                 <TextView
-                    android:id="@+id/basligi"
-                    android:layout_width="match_parent"
+                    android:id="@+id/username"
+                    android:layout_below="@id/name_profile"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bio"
-                    android:layout_marginStart="10dp"
-                    android:textSize="24sp"
-                    android:textColor="#000"
+                    android:text="username"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray"
                     />
 
                 <TextView
-                    android:id="@+id/pio"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/basligi"
-                    android:textColor="#6C6C6C"
-                    android:padding="5dp"
-                    android:textSize="18sp" />
+                    android:id="@+id/name_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User Name"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
 
             </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/under_profile_header"
+            android:layout_below="@id/profile_header"
+            android:layout_width="match_parent"
+            android:padding="20dp"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_alignParentRight="true"
+                android:layout_width="210dp"
+                android:layout_marginRight="15dp"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/edit_profile"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="Edit profile"
+                    android:textColor="@color/mainBackground"
+                    android:textSize="14sp"
+                    android:background="@drawable/contact_btn_stroke"/>
+
+                <TextView
+                    android:layout_below="@+id/edit_profile"
+                    android:id="@+id/job_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="Job Title"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/job_title"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="18sp"
+                    android:textColor="#000"
+                    android:text="Adrress"/>
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_img"
+            android:layout_below="@+id/profile_header"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="-60dp"
+            android:layout_marginStart="40dp"
+            android:src="@mipmap/ic_launcher"
+            app:civ_border_width="5dp"
+            app:civ_border_color="@color/white"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_below="@id/under_profile_header"
+            app:tabIndicatorColor="@color/mainBackground"
+            app:tabSelectedTextColor="@color/mainBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notifications" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="projects" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reviews" />
+        </com.google.android.material.tabs.TabLayout>
+
 
     </RelativeLayout>
 </FrameLayout>

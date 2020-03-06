@@ -6,97 +6,99 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/register_ID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="6dp"
-        android:layout_toEndOf="@id/textView4"
-        android:text="@string/register"
-        android:textColor="#AA3939"
-        android:textSize="15sp"
-        android:textStyle="normal" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="95dp"
-        android:layout_marginBottom="6dp"
-        android:text="@string/you_are_not_a_member"
-        android:textSize="15sp" />
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="532dp"
-        android:layout_alignParentTop="true"
+        android:id="@+id/footer"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="127dp"
-        android:background="@color/mainBackground"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <RelativeLayout
+            android:layout_centerHorizontal="true"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/register_ID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@id/textView4"
+                android:layout_marginStart="5dp"
+                android:text="@string/register"
+                android:textColor="#AA3939"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="@string/you_are_not_a_member"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_above="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:background="@drawable/profile_grad">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="218dp"
+            android:layout_width="220dp"
             android:layout_height="260dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="142dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="364dp"
             app:srcCompat="@drawable/vworld" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="312dp"
-            android:layout_height="57dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="57dp"
-            android:layout_marginEnd="63dp"
-            android:layout_marginBottom="259dp"
-            android:text="Welcome!"
-            android:textColor="#FFF"
-            android:textSize="45sp"
-            android:textStyle="bold" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="15dp"
+            android:padding="20dp"
+            android:layout_below="@id/imageView">
 
-        <Button
-            android:id="@+id/login_ID"
-            android:layout_width="175dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="55dp"
-            android:layout_marginEnd="202dp"
-            android:layout_marginBottom="160dp"
-            android:background="@drawable/btn_login"
-            android:text="Log In"
-            android:textColor="#FFF"
-            android:textSize="20sp"
-            android:textStyle="normal" />
+            <TextView
+                android:id="@+id/welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome!"
+                android:textColor="#FFF"
+                android:textSize="45sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="217dp"
-            android:layout_height="37dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="64dp"
-            android:layout_marginEnd="151dp"
-            android:layout_marginBottom="227dp"
-            android:text="Nice to see again!"
-            android:textColor="#95A7BD"
-            android:textSize="18sp"
-            android:textStyle="normal" />
+            <TextView
+                android:layout_below="@id/welcome"
+                android:id="@+id/nice_to_see"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nice to see again!"
+                android:textColor="#95A7BD"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+            <Button
+                android:id="@+id/login_ID"
+                android:layout_below="@id/nice_to_see"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_login"
+                android:text="Log In"
+                android:textColor="#FFF"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
 

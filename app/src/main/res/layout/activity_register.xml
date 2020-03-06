@@ -37,7 +37,7 @@
         android:layout_height="320dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
-        android:background="@color/mainBackground"
+        android:background="@drawable/profile_grad"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 

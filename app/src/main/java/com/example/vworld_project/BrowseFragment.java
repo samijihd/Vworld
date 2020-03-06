@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.vworld_project.Adapter.ProfileAdapter;
 import com.example.vworld_project.Adapter.UserAdapter;
 import com.example.vworld_project.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,7 +41,7 @@ import java.util.Objects;
 public class BrowseFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private UserAdapter userAdapter;
+    private ProfileAdapter profileAdapter;
     private EditText search;
 
     private ImageView toChat;
@@ -51,8 +52,6 @@ public class BrowseFragment extends Fragment {
     private DatabaseReference reference;
 
     private List<User> mUser;
-
-
 
 
     @Override
@@ -120,8 +119,8 @@ public class BrowseFragment extends Fragment {
                         mUser.add(user);
                     }
                 }
-                userAdapter = new UserAdapter(getContext(), mUser, false);
-                recyclerView.setAdapter(userAdapter);
+                profileAdapter = new ProfileAdapter(getContext(), mUser, false);
+                recyclerView.setAdapter(profileAdapter);
 
             }
 
@@ -156,8 +155,8 @@ public class BrowseFragment extends Fragment {
                         }
                     }
 
-                    userAdapter = new UserAdapter(getContext(), mUser, false);
-                    recyclerView.setAdapter(userAdapter);
+                    profileAdapter = new ProfileAdapter(getContext(), mUser, false);
+                    recyclerView.setAdapter(profileAdapter);
                 }
             }
 

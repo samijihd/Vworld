@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,11 +51,10 @@ import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 public class AccountFragment extends Fragment {
 
     private CircleImageView profile_image1;
-    private TextView username;
-    private TextView name;
+    private TextView username, name, jobtitle, address;
 
 
-    private Button signout;
+    private ImageView signout;
     private FirebaseAuth auth;
     private FirebaseUser firebaseUser;
     private FirebaseDatabase firebaseDatabase;
@@ -77,6 +77,8 @@ public class AccountFragment extends Fragment {
         profile_image1 = viewGroup.findViewById(R.id.profile_img);
         username = viewGroup.findViewById(R.id.username);
         name = viewGroup.findViewById(R.id.name_profile);
+        jobtitle = viewGroup.findViewById(R.id.job_title);
+        address = viewGroup.findViewById(R.id.address);
 
         auth = FirebaseAuth.getInstance();
         firebaseUser = auth.getCurrentUser();
@@ -96,6 +98,8 @@ public class AccountFragment extends Fragment {
                 assert user != null;
                 name.setText(user.getName());
                 username.setText("@"+user.getUsername());
+                jobtitle.setText(user.getJobtitle());
+                address.setText(user.getAddress());
 
                 if (user.getImageURL().equals("default")){
                     profile_image1.setImageResource(R.mipmap.ic_launcher);
