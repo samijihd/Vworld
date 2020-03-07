@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@drawable/chat_back"
     tools:context=".MessageActivity">
 
     <RelativeLayout
@@ -17,7 +17,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="15dp"
+            android:paddingBottom="5dp"
             android:id="@+id/recycle_chat"/>
     </RelativeLayout>
 
@@ -26,8 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:padding="8dp"
-        android:background="@color/mainBackground">
+        android:padding="8dp">
 
         <EditText
             android:id="@+id/message_Text"
