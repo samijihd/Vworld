@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="20dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/project_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Project Title"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/period_project"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/time"
+        android:text=" closes in n days"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/project_title"/>
+
+    <TextView
+        android:id="@+id/bids"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/bids"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="35dp"
+        android:text=" n bids"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:layout_toRightOf="@id/period_project"
+        android:layout_below="@id/project_title"/>
+
+
+    <TextView
+        android:id="@+id/cost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" $250 - $500 USD"
+        android:textColor="#000"
+        android:layout_below="@id/period_project"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:drawableLeft="@drawable/dollar"/>
+
+
+</RelativeLayout>

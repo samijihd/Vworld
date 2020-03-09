@@ -118,12 +118,12 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Education" />
+            android:text="notifications" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rank" />
+            android:text="projects" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"

@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.vworld_project.Adapter.ProfileAdapter;
-import com.example.vworld_project.Adapter.UserAdapter;
 import com.example.vworld_project.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -144,11 +143,9 @@ public class BrowseFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (search.getText().toString().equals("")) {
-
                     mUser.clear();
-
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        User user = snapshot.getValue(User.class);
+                        final User user = snapshot.getValue(User.class);
                         assert user != null;
                         if (!user.getId().equals(firebaseUser.getUid())) {
                             mUser.add(user);
