@@ -3,23 +3,31 @@ package com.example.vworld_project.Model;
 public class Project {
 
     private String projectid;
-    private String onwerid;
+    private String ownerid;
     private String type;
     private String title;
+    private String description;
     private String time;
     private String bids;
-    private int bidno;
-    private String cost;
+    private String  bidno;
+    private String budget;
+    private String skill;
 
-    public Project(String projectid, String onwerid, String type, String title, String time, String bids, int bidno, String cost) {
+    public Project(String projectid, String ownerid, String type, String title, String description, String time, String bids, String bidno, String budget, String skill) {
         this.projectid = projectid;
-        this.onwerid = onwerid;
+        this.ownerid = ownerid;
         this.type = type;
         this.title = title;
+        this.description = description;
         this.time = time;
         this.bids = bids;
         this.bidno = bidno;
-        this.cost = cost;
+        this.budget = budget;
+        this.skill = skill;
+    }
+
+    public Project(){
+
     }
 
     public String getProjectid() {
@@ -30,12 +38,12 @@ public class Project {
         this.projectid = projectid;
     }
 
-    public String getOnwerid() {
-        return onwerid;
+    public String getOwnerid() {
+        return ownerid;
     }
 
-    public void setOnwerid(String onwerid) {
-        this.onwerid = onwerid;
+    public void setOwnerid(String ownerid) {
+        this.ownerid = ownerid;
     }
 
     public String getType() {
@@ -54,6 +62,14 @@ public class Project {
         this.title = title;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getTime() {
         return time;
     }
@@ -70,19 +86,27 @@ public class Project {
         this.bids = bids;
     }
 
-    public int getBidno() {
+    public String getBidno() {
         return bidno;
     }
 
-    public void setBidno(int bidno) {
+    public void setBidno(String bidno) {
         this.bidno = bidno;
     }
 
-    public String getCost() {
-        return cost;
+    public String getBudget() {
+        return budget;
     }
 
-    public void setCost(String cost) {
-        this.cost = cost;
+    public void setBudget(String budget) {
+        this.budget = budget;
+    }
+
+    public String getSkill() {
+        return skill;
+    }
+
+    public void setSkill(String skill) {
+        this.skill = skill;
     }
 }

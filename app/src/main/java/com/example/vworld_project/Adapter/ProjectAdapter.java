@@ -44,7 +44,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
         holder.title.setText(project.getTitle());
         holder.time.setText(project.getTime());
         holder.bids.setText(project.getBidno());
-        holder.cost.setText(project.getCost());
+        holder.budget.setText(project.getBudget());
     }
 
     @Override
@@ -54,15 +54,15 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView title, time, bids, cost;
+        TextView title, time, bids, budget;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             title = itemView.findViewById(R.id.project_title);
             time = itemView.findViewById(R.id.period_project);
             bids = itemView.findViewById(R.id.bids);
-            cost = itemView.findViewById(R.id.cost);
+            budget = itemView.findViewById(R.id.cost);
 
         }
     }

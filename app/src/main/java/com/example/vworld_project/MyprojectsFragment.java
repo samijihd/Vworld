@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -46,9 +47,12 @@ public class MyprojectsFragment extends Fragment {
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_myprojects, container, false);
 
         recyclerView = viewGroup.findViewById(R.id.projects_recycle);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         auth = FirebaseAuth.getInstance();
         firebaseUser = auth.getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
         mProjects = new ArrayList<>();
 
@@ -62,7 +66,7 @@ public class MyprojectsFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         firebaseUser = auth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        reference = firebaseDatabase.getReference("Projects");
+        reference = firebaseDatabase.getReference("Project");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -70,9 +74,10 @@ public class MyprojectsFragment extends Fragment {
                 mProjects.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Project project = snapshot.getValue(Project.class);
-
+                    mProjects.add(project);
                 }
-
+                projectAdapter = new ProjectAdapter(getContext(), mProjects);
+                recyclerView.setAdapter(projectAdapter);
             }
 
             @Override

@@ -27,38 +27,12 @@ import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private FirebaseAuth auth;
-    public Button signout;
+    BottomNavigationView nav_View;
 
+    private FirebaseAuth auth;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
-
-    /*
-optioins menu items
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuinf = getMenuInflater();
-        menuinf.inflate(R.menu.home_options_menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.signout){
-            auth.signOut();
-            startActivity(new Intent(HomeActivity.this , LoginActivity.class));
-        }
-            return super.onOptionsItemSelected(item);
-    }
-*/
-    /*public void setSignout(FirebaseAuth auth){
-        auth.signOut();
-        startActivity(new Intent(this , LoginActivity.class));
-        finish();
-    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +44,7 @@ optioins menu items
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference("Users").child(firebaseUser.getUid());
 
-        BottomNavigationView nav_View = findViewById(R.id.bottom_nav);
+        nav_View = findViewById(R.id.bottom_nav);
 
         final MessagesFragment msgfragment = new MessagesFragment();
         final MyprojectsFragment myprojectfragment = new MyprojectsFragment();
@@ -78,13 +52,39 @@ optioins menu items
         final BrowseFragment browsefragment = new BrowseFragment();
         final AccountFragment accountFragment = new AccountFragment();
 
-        setFragment(msgfragment);
+        if (savedInstanceState == null){
+            setFragment(msgfragment);
+        }
 
         nav_View.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
+                switch (item.getItemId()){
+                    case R.id.msgID:
+                        setFragment(msgfragment);
+                        return true;
+                    case R.id.projectID:
+                        setFragment(myprojectfragment);
+                        return  true;
+                    case R.id.postID:
+                        setFragment(postFragment);
+                        return true;
+                    case R.id.browseID:
+                        setFragment(browsefragment);
+                        return true;
+                    case R.id.accountID:
+                        setFragment(accountFragment);
+                        return true;
+                }
+                return true;
+            }
+        });
 
+/*
+        nav_View.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
 
                 try {
                     if(id == R.id.msgID){
@@ -113,9 +113,9 @@ optioins menu items
                 catch (Exception e){
                     Toast.makeText(HomeActivity.this , e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 }
-                return false;
+                return true;
             }
-        });
+        });*/
 
     }
 

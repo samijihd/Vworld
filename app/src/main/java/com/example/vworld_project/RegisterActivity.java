@@ -122,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
                         assert firebaseUser != null; //its not important ! you can remove it
                         String userid = firebaseUser.getUid();
 
-                        //make refernce for database name= Users
+                        //make reference for database name = Users
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         reference = database.getReference("Users").child(userid);
 

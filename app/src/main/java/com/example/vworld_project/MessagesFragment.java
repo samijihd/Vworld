@@ -75,12 +75,12 @@ public class MessagesFragment extends Fragment {
             }
 
         });
-
         return viewGroup;
     }
 
     private void chatList() {
         mUsers = new ArrayList<>();
+        firebaseUser = auth.getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -90,7 +90,7 @@ public class MessagesFragment extends Fragment {
                     User user = snapshot.getValue(User.class);
                     for (Chatlist chatlist : usersList){
                         assert user != null;
-                        if(user.getId().equals(chatlist.getId())){
+                        if(user.getId().equals(chatlist.getId()) ){
                             mUsers.add(user);
                         }
                     }

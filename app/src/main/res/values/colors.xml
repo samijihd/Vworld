@@ -6,9 +6,9 @@
     <color name="mainBackground">#0E1C40</color>
     <color name="RelativeLayout">#9DA3B3</color>
     <color name="red">#AA3939</color>
-    <color name="blue">#33B5E5</color>
+    <color name="blue">#328DE1</color>
     <color name="white">#FFFFFF</color>
-    <color name="whiteTrans">#AAAAAA</color>
-
+    <color name="whiteTrans">#FAFAFB</color>
+    <color name="normal_gray">#F6F7F9</color>
     <color name="gray">#e6e6e6</color>
 </resources>

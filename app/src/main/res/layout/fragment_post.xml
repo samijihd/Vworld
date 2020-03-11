@@ -11,23 +11,8 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/body"
-            android:layout_below="@+id/header"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-
-            <Spinner
-                android:id="@+id/spinner"
-                android:background=""
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
             android:id="@+id/header"
+            android:background="@color/whiteTrans"
             android:layout_width="match_parent"
             android:layout_height="60dp">
 
@@ -42,6 +27,135 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/body"
+            android:padding="20dp"
+            android:layout_below="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textSize="14sp"
+                android:textColor="#000" />
+
+            <EditText
+                android:id="@+id/title_txt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/title"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:textCursorDrawable="@color/blue"
+                android:hint="What do you need done?"/>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/title_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="Description"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/description_txt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/description"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:textCursorDrawable="@color/blue"
+                android:hint="Add more details"/>
+
+            <TextView
+                android:id="@+id/project_type"
+                android:layout_marginTop="25dp"
+                android:layout_below="@id/description_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="Project Type"
+                android:textSize="14sp" />
+
+            <Spinner
+                android:id="@+id/type_spinner"
+                android:background="@color/blue"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/project_type"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:id="@+id/budget"
+                android:layout_marginTop="25dp"
+                android:layout_below="@id/type_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="Budget"
+                android:textSize="14sp" />
+
+            <Spinner
+                android:id="@+id/spinner_budget"
+                android:background="@color/blue"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/budget"
+                android:layout_width="230dp"
+                android:layout_height="45dp" />
+
+            <Spinner
+                android:id="@+id/money_type_spinner"
+                android:background="@color/blue"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/budget"
+                android:layout_width="120dp"
+                android:layout_height="45dp" />
+
+            <TextView
+                android:id="@+id/skill"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/spinner_budget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="Skills set for this project"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/skill_txt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/skill"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:textCursorDrawable="@color/blue"
+                android:hint="Add skills..."/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/post_project"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="Post project"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:background="@color/blue"/>
+
 
         </RelativeLayout>
     </RelativeLayout>

@@ -20,6 +20,7 @@
         android:textSize="18dp"
         android:padding="7dp"
         android:text="message text"
+        android:textColor="#000"
         android:background="@drawable/back_msg_left"
         />
 
