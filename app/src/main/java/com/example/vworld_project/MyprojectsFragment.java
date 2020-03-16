@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -67,6 +68,8 @@ public class MyprojectsFragment extends Fragment {
         firebaseUser = auth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference("Project");
+
+        Query query = firebaseDatabase.getReference("Project");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override

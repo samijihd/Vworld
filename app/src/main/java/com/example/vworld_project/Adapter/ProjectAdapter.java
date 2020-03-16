@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.vworld_project.MessageActivity;
 import com.example.vworld_project.Model.Project;
+import com.example.vworld_project.ProjectActivity;
 import com.example.vworld_project.R;
 
 import org.w3c.dom.Text;
@@ -40,11 +41,20 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ProjectAdapter.ViewHolder holder, int position) {
-        Project project = mProjects.get(position);
+        final Project project = mProjects.get(position);
         holder.title.setText(project.getTitle());
         holder.time.setText(project.getTime());
         holder.bids.setText(project.getBidno());
         holder.budget.setText(project.getBudget());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, ProjectActivity.class);
+                intent.putExtra("postid", project.getId());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

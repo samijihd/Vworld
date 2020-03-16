@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/project_header"
+    tools:context=".ProjectActivity">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/left_arrow_white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/back"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="30dp"
+            android:text="Project Details"
+            android:textSize="24sp"
+            android:textStyle="normal"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
+    <ScrollView
+        android:layout_below="@id/header"
+        android:layout_above="@id/footer"
+        android:background="@drawable/project_body"
+        android:paddingTop="5dp"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:id="@+id/body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="this the title of project this the title of project"
+                    android:textSize="24sp"
+                    android:textColor="#000"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/title"
+                    android:layout_marginTop="5dp"
+                    android:text="16 Mar 2020 21:09:54"
+                    android:textColor="@color/blue"
+                    android:textSize="14sp"
+                    android:textStyle="normal"/>
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nothing"
+                    android:textSize="18sp"
+                    android:textColor="#000"
+                    android:layout_below="@id/date"
+                    android:layout_marginTop="5dp"
+                    android:padding="5dp"
+                    />
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/description"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:id="@+id/pudget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Project Budget"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:layout_below="@id/description"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/budget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" $500 - 2500"
+                    android:textSize="22sp"
+                    android:textColor="#000"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/pudget"/>
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@id/budget"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:id="@+id/skill_tit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Skills Required"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:layout_below="@id/budget"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/skill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" this project requires many skills"
+                    android:textSize="22sp"
+                    android:textColor="#000"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/skill_tit"/>
+
+                <RelativeLayout
+                    android:layout_below="@id/skill"
+                    android:padding="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/bid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Bids"
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        android:textSize="22sp"/>
+
+                    <TextView
+                        android:id="@+id/bids"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="8 bids"
+                        android:textSize="22sp"
+                        android:textColor="#000"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@id/bid"/>
+
+                    <TextView
+                        android:id="@+id/see_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:text="See More"
+                        android:textColor="@color/blue"
+                        android:textSize="16sp"
+                        android:textStyle="normal"/>
+
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@id/skill"
+                    android:background="?android:attr/listDivider" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true">
+
+        <RelativeLayout
+            android:id="@+id/upper_footer"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="it's FREE to place a bid"
+                android:textStyle="normal"
+                android:textColor="#000"
+                android:textSize="14sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/down_footer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="20dp"
+            android:layout_below="@id/upper_footer"
+            android:background="@color/white">
+
+            <Button
+                android:id="@+id/bid_btn"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:text="place a bid"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:background="@drawable/bid_custom_btn"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

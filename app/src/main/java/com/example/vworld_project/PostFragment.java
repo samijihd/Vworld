@@ -26,6 +26,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.sql.Time;
+import java.util.Calendar;
+
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -37,11 +41,16 @@ public class PostFragment extends Fragment {
 
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
+    Date currentTime;
+    String time;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_post, container, false);
+
+        currentTime = Calendar.getInstance().getTime();
+        //time = currentTime.toString();
 
         final Spinner typeSpinner = (Spinner) viewGroup.findViewById(R.id.type_spinner);
         final Spinner budgetSpinner = (Spinner) viewGroup.findViewById(R.id.spinner_budget);
@@ -140,7 +149,14 @@ public class PostFragment extends Fragment {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference();
 
+        currentTime = Calendar.getInstance().getTime();
+        //time = currentTime.toString();
+        time = java.text.DateFormat.getDateTimeInstance().format(new Date());
+
+        String id = reference.push().getKey();
+
         HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("id", id);
         hashMap.put("title", title);
         hashMap.put("ownerid", firebaseUser.getUid());
         hashMap.put("description", description);
@@ -149,9 +165,10 @@ public class PostFragment extends Fragment {
         hashMap.put("money", money);
         hashMap.put("skill", skill);
         hashMap.put("bidno", " 0");
-        hashMap.put("time", " 6");
+        hashMap.put("time", time);
 
-        reference.child("Project").push().setValue(hashMap, new DatabaseReference.CompletionListener() {
+        assert id != null;
+        reference.child("Project").child(id).setValue(hashMap, new DatabaseReference.CompletionListener() {
             @SuppressLint("ShowToast")
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {

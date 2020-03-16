@@ -2,6 +2,7 @@ package com.example.vworld_project.Model;
 
 public class Project {
 
+    private String id;
     private String projectid;
     private String ownerid;
     private String type;
@@ -13,7 +14,8 @@ public class Project {
     private String budget;
     private String skill;
 
-    public Project(String projectid, String ownerid, String type, String title, String description, String time, String bids, String bidno, String budget, String skill) {
+    public Project(String id, String projectid, String ownerid, String type, String title, String description, String time, String bids, String bidno, String budget, String skill) {
+        this.id = id;
         this.projectid = projectid;
         this.ownerid = ownerid;
         this.type = type;
@@ -28,6 +30,14 @@ public class Project {
 
     public Project(){
 
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getProjectid() {
