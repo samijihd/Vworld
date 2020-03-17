@@ -51,7 +51,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, ProjectActivity.class);
-                intent.putExtra("postid", project.getId());
+                intent.putExtra("projectid", project.getId());
                 mContext.startActivity(intent);
             }
         });

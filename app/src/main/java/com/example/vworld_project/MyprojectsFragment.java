@@ -69,7 +69,7 @@ public class MyprojectsFragment extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference("Project");
 
-        Query query = firebaseDatabase.getReference("Project");
+        //Query query = firebaseDatabase.getReference("Project");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
