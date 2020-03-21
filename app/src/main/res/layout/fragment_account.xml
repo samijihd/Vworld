@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +9,6 @@
     tools:context=".AccountFragment">
 
     <RelativeLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
@@ -17,7 +17,7 @@
         <RelativeLayout
             android:id="@+id/profile_header"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="160dp"
             android:padding="15dp"
             android:background="@drawable/profile_grad">
 
@@ -40,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="username"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
                     android:textColor="@color/gray"
                     />
 
@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:text="User Name"
                     android:textColor="@color/white"
-                    android:textSize="24sp" />
+                    android:textSize="20sp" />
 
             </RelativeLayout>
 
@@ -60,7 +60,7 @@
             android:id="@+id/under_profile_header"
             android:layout_below="@id/profile_header"
             android:layout_width="match_parent"
-            android:padding="20dp"
+            android:padding="15dp"
             android:layout_height="wrap_content">
 
             <RelativeLayout
@@ -89,7 +89,7 @@
                     android:text="Job Title"
                     android:textAlignment="center"
                     android:textColor="#000"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/address"
@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/job_title"
                     android:layout_centerHorizontal="true"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="#000"
                     android:text="Adrress"/>
 
@@ -108,15 +108,16 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_img"
             android:layout_below="@+id/profile_header"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_marginTop="-60dp"
-            android:layout_marginStart="40dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="-45dp"
+            android:layout_marginStart="50dp"
             android:src="@mipmap/ic_launcher"
             app:civ_border_width="5dp"
             app:civ_border_color="@color/white"/>
 
         <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
             android:layout_below="@id/under_profile_header"
             app:tabIndicatorColor="@color/mainBackground"
             app:tabSelectedTextColor="@color/mainBackground"
@@ -138,6 +139,13 @@
                 android:layout_height="wrap_content"
                 android:text="Reviews" />
         </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tab_layout"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
     </RelativeLayout>

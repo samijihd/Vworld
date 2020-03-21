@@ -11,6 +11,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +30,7 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -40,7 +44,9 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -53,15 +59,11 @@ public class AccountFragment extends Fragment {
     private CircleImageView profile_image1;
     private TextView username, name, jobtitle, address;
 
-
-    private ImageView signout;
     private FirebaseAuth auth;
     private FirebaseUser firebaseUser;
-    private FirebaseDatabase firebaseDatabase;
     private DatabaseReference reference;
 
     private StorageReference mStorageRef;
-    FirebaseStorage storage;
     private Uri imageUri;
     private StorageTask<UploadTask.TaskSnapshot> uploadTask;
 
@@ -73,7 +75,14 @@ public class AccountFragment extends Fragment {
                              Bundle savedInstanceState) {
         final ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_account , container , false);
 
-        signout = viewGroup.findViewById(R.id.signoutID);
+        // tab layout *****************************************************
+        TabLayout tabLayout = viewGroup.findViewById(R.id.tab_layout);
+        ViewPager viewPager = viewGroup.findViewById(R.id.pager);
+        setupViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
+        // tab layout // ******************************************************
+
+        ImageView signout = viewGroup.findViewById(R.id.signoutID);
         profile_image1 = viewGroup.findViewById(R.id.profile_img);
         username = viewGroup.findViewById(R.id.username);
         name = viewGroup.findViewById(R.id.name_profile);
@@ -82,10 +91,10 @@ public class AccountFragment extends Fragment {
 
         auth = FirebaseAuth.getInstance();
         firebaseUser = auth.getCurrentUser();
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference("Users").child(firebaseUser.getUid());
 
-        storage = FirebaseStorage.getInstance();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
         mStorageRef = storage.getReference("profile_Images");
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -130,7 +139,8 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 auth.signOut();
-                startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext() , LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext()
+                        , LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 Toast.makeText(getActivity() , "logged out" , Toast.LENGTH_LONG);
                 getActivity().finish();
             }
@@ -221,44 +231,41 @@ public class AccountFragment extends Fragment {
         }
     }
 
-    /*
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+        adapter.addFragment(new NotificationFragment(), "NOTIFICATIONS");
+        adapter.addFragment(new ProjectsFragment(), "PROJECTS");
+        adapter.addFragment(new ReviewFragment(), "REVIEWS");
+        viewPager.setAdapter(adapter);
+    }
 
-        if (requestCode == Gallery_pick && resultCode == RESULT_OK && data != null && data.getData() != null){
-            Uri imageUri = data.getData();
+    static class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
 
-            CropImage.activity()
-                    .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1, 1)
-                    .start(Objects.requireNonNull(getActivity()));
+        ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
         }
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
-            if (resultCode == RESULT_OK){
-                assert result != null;
-                Uri resultUri = result.getUri();
-
-                firebaseUser = auth.getCurrentUser();
-                assert firebaseUser != null;
-                StorageReference filepath = mStorageRef.child(firebaseUser.getUid() + ".jpg");
-
-                filepath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(getActivity() , "Profile image uploaded " , Toast.LENGTH_LONG).show();
-                        }
-                        else {
-                            String msg = Objects.requireNonNull(task.getException()).toString();
-                                Toast.makeText(getActivity() , "Error: " + msg , Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-            }
-
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
         }
-    }*/
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+    }
 }
