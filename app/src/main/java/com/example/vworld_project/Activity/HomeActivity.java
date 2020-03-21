@@ -1,22 +1,19 @@
-package com.example.vworld_project;
+package com.example.vworld_project.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.accounts.Account;
-import android.content.ClipData;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
+import com.example.vworld_project.Fragment.AccountFragment;
+import com.example.vworld_project.Fragment.BrowseFragment;
+import com.example.vworld_project.Fragment.MessagesFragment;
+import com.example.vworld_project.Fragment.MyprojectsFragment;
+import com.example.vworld_project.Fragment.PostFragment;
+import com.example.vworld_project.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

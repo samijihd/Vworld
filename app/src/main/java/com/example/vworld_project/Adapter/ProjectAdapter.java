@@ -5,20 +5,15 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.example.vworld_project.MessageActivity;
 import com.example.vworld_project.Model.Project;
-import com.example.vworld_project.ProjectActivity;
+import com.example.vworld_project.Activity.ProjectActivity;
 import com.example.vworld_project.R;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 

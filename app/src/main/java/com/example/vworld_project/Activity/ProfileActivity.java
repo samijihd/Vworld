@@ -1,7 +1,11 @@
-package com.example.vworld_project;
+package com.example.vworld_project.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,8 +16,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.vworld_project.Model.Message;
+import com.example.vworld_project.Activity.MessageActivity;
+import com.example.vworld_project.Fragment.ProjectsFragment;
+import com.example.vworld_project.Fragment.ReviewFragment;
 import com.example.vworld_project.Model.User;
+import com.example.vworld_project.R;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,16 +30,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProfileActivity extends AppCompatActivity {
 
     private TextView name, username, jobtitle, address;
     private Button contact;
     private ImageView profile_image;
-
-    private FirebaseAuth auth;
-    private FirebaseUser firebaseUser;
-    private DatabaseReference reference;
-    private FirebaseDatabase firebaseDatabase;
 
     String userid;
 
@@ -39,6 +45,13 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        // tab layout *****************************************************
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        setupViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
+        // tab layout // ******************************************************
 
         name = findViewById(R.id.name_profile);
         username = findViewById(R.id.username);
@@ -51,11 +64,11 @@ public class ProfileActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         userid = intent.getStringExtra("userid");
 
-        auth = FirebaseAuth.getInstance();
-        firebaseUser = auth.getCurrentUser();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = auth.getCurrentUser();
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        reference = firebaseDatabase.getReference("Users").child(userid);
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference reference = firebaseDatabase.getReference("Users").child(userid);
         reference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -92,7 +105,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,5 +112,42 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new ProjectsFragment(), "PROJECTS");
+        adapter.addFragment(new ReviewFragment(), "REVIEWS");
+        viewPager.setAdapter(adapter);
+    }
+
+    static class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 }

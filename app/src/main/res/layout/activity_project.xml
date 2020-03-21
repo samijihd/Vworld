@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/project_header"
-    tools:context=".ProjectActivity">
+    tools:context=".Activity.ProjectActivity">
 
     <RelativeLayout
         android:id="@+id/header"

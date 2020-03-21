@@ -13,18 +13,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BidsListActivity"></activity>
-        <activity android:name=".BidActivity" />
-        <activity android:name=".ProjectActivity" />
+        <activity android:name=".Activity.BidsListActivity"></activity>
+        <activity android:name=".Activity.BidActivity" />
+        <activity android:name=".Activity.ProjectActivity" />
         <activity
-            android:name=".ResetPasswordActivity"
-            android:parentActivityName=".LoginActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".MessageActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+            android:name=".Activity.ResetPasswordActivity"
+            android:parentActivityName=".Activity.LoginActivity" />
+        <activity android:name=".Activity.ProfileActivity" />
+        <activity android:name=".Activity.MessageActivity" />
+        <activity android:name=".Activity.HomeActivity" />
+        <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

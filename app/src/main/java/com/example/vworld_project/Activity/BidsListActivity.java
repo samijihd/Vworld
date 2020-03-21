@@ -1,4 +1,4 @@
-package com.example.vworld_project;
+package com.example.vworld_project.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,29 +8,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.vworld_project.Adapter.BidAdapter;
-import com.example.vworld_project.Adapter.ProfileAdapter;
 import com.example.vworld_project.Model.Bid;
-import com.example.vworld_project.Model.Project;
 import com.example.vworld_project.Model.User;
+import com.example.vworld_project.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class BidsListActivity extends AppCompatActivity {
 

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/chat_back"
-    tools:context=".MessageActivity">
+    tools:context=".Activity.MessageActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -13,9 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.vworld_project.MessageActivity;
 import com.example.vworld_project.Model.User;
-import com.example.vworld_project.ProfileActivity;
+import com.example.vworld_project.Activity.ProfileActivity;
 import com.example.vworld_project.R;
 
 import java.util.List;

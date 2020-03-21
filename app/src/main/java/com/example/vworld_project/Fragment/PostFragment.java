@@ -1,4 +1,4 @@
-package com.example.vworld_project;
+package com.example.vworld_project.Fragment;
 
 
 import android.annotation.SuppressLint;
@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.vworld_project.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

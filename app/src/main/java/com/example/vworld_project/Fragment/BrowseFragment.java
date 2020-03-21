@@ -1,4 +1,4 @@
-package com.example.vworld_project;
+package com.example.vworld_project.Fragment;
 
 
 import android.content.Intent;
@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.vworld_project.Adapter.ProfileAdapter;
 import com.example.vworld_project.Model.User;
+import com.example.vworld_project.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

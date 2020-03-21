@@ -1,4 +1,4 @@
-package com.example.vworld_project;
+package com.example.vworld_project.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,11 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.vworld_project.Adapter.MessageAdapter;
 import com.example.vworld_project.Model.Message;
 import com.example.vworld_project.Model.User;
+import com.example.vworld_project.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
