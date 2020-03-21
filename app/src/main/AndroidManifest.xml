@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProjectActivity"></activity>
+        <activity android:name=".BidsListActivity"></activity>
+        <activity android:name=".BidActivity" />
+        <activity android:name=".ProjectActivity" />
         <activity
             android:name=".ResetPasswordActivity"
             android:parentActivityName=".LoginActivity" />

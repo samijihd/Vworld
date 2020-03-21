@@ -49,7 +49,10 @@ public class MyprojectsFragment extends Fragment {
 
         recyclerView = viewGroup.findViewById(R.id.projects_recycle);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setRecycleChildrenOnDetach(false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        //recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         auth = FirebaseAuth.getInstance();
         firebaseUser = auth.getCurrentUser();
@@ -69,7 +72,7 @@ public class MyprojectsFragment extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference("Project");
 
-        //Query query = firebaseDatabase.getReference("Project");
+        //  Query query = firebaseDatabase.getReference("Project");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override

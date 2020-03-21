@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BidActivity">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:src="@drawable/left_arrow_black"/>
+
+        <TextView
+            android:id="@+id/title_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Place a bid on"
+            android:textColor="#000"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_below="@id/back"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="50dp"
+            android:text="@string/title_nothing"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            android:layout_below="@id/title_header"/>
+
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_below="@id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:id="@+id/body"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/paid_to_you"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Paid to you"
+                    android:textStyle="normal"
+                    android:textSize="22sp"
+                    android:textColor="#000"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="normal"
+                    android:layout_toEndOf="@id/paid_to_you"
+                    android:text="*"
+                    android:layout_marginStart="5dp"
+                    android:textSize="22sp"
+                    android:textColor="@color/red"/>
+
+                <EditText
+                    android:id="@+id/paid_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/input_textbox_bid"
+                    android:textSize="22sp"
+                    android:textColor="#000"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:inputType="number"
+                    android:layout_below="@id/paid_to_you"/>
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="USD"
+                    android:layout_below="@id/paid_to_you"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentEnd="true"
+                    android:textAlignment="center"
+                    android:background="@drawable/bid_input_type"
+                    android:textSize="22sp"
+                    android:padding="10dp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/body2"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/body">
+
+                <TextView
+                    android:id="@+id/deliver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deliver in"
+                    android:textStyle="normal"
+                    android:textSize="22sp"
+                    android:textColor="#000"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="normal"
+                    android:layout_toEndOf="@id/deliver"
+                    android:text="*"
+                    android:layout_marginStart="5dp"
+                    android:textSize="22sp"
+                    android:textColor="@color/red"/>
+
+                <EditText
+                    android:id="@+id/day_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/input_textbox_bid"
+                    android:textSize="22sp"
+                    android:textColor="#000"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:inputType="number"
+                    android:layout_below="@id/deliver"/>
+
+                <TextView
+                    android:id="@+id/days"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="Days"
+                    android:layout_below="@id/deliver"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentEnd="true"
+                    android:textAlignment="center"
+                    android:background="@drawable/bid_input_type"
+                    android:textSize="22sp"
+                    android:padding="10dp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/body3"
+                android:padding="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/body2">
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Describe your bid"
+                    android:textStyle="normal"
+                    android:textSize="22sp"
+                    android:textColor="#000"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="normal"
+                    android:layout_toEndOf="@id/description"
+                    android:text="*"
+                    android:layout_marginStart="5dp"
+                    android:textSize="22sp"
+                    android:textColor="@color/red"/>
+
+                <EditText
+                    android:id="@+id/description_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@drawable/input_textbox_bid"
+                    android:textSize="22sp"
+                    android:textColor="#000"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:gravity="top|left"
+                    android:layout_below="@id/description"/>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/bid_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="place a bid"
+                android:textColor="@color/white"
+                android:padding="10dp"
+                android:textSize="22sp"
+                android:textAlignment="center"
+                android:layout_below="@id/body3"
+                android:layout_margin="15dp"
+                android:background="@drawable/bid_custom_btn"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+</RelativeLayout>
