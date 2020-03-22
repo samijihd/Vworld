@@ -26,7 +26,6 @@ public class HomeActivity extends AppCompatActivity {
 
     BottomNavigationView nav_View;
 
-    private FirebaseAuth auth;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
@@ -36,7 +35,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        auth = FirebaseAuth.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         firebaseUser = auth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference("Users").child(firebaseUser.getUid());
@@ -118,7 +117,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frameID , fragment); //.commit(); you can write the next line here
+        fragmentTransaction.replace(R.id.frameID , fragment);
         fragmentTransaction.commit();
     }
 

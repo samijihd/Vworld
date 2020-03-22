@@ -35,12 +35,12 @@ public class BidActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bid);
 
-        TextView title = (TextView) findViewById(R.id.title);
-        final EditText paid = (EditText) findViewById(R.id.paid_input);
-        final EditText day = (EditText) findViewById(R.id.day_input);
-        final EditText description = (EditText) findViewById(R.id.description_input);
-        ImageView back = (ImageView) findViewById(R.id.back);
-        Button bidSubmit = (Button) findViewById(R.id.bid_submit);
+        TextView title = findViewById(R.id.title);
+        final EditText paid = findViewById(R.id.paid_input);
+        final EditText day = findViewById(R.id.day_input);
+        final EditText description = findViewById(R.id.description_input);
+        ImageView back = findViewById(R.id.back);
+        Button bidSubmit = findViewById(R.id.bid_submit);
 
         final Intent intent = getIntent();
         final String mTitle = intent.getStringExtra("title");

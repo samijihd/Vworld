@@ -31,7 +31,6 @@ public class BidsListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<Bid> mBid;
-    private ImageView back;
 
     private BidAdapter bidAdapter;
 
@@ -45,7 +44,7 @@ public class BidsListActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setLayoutManager(linearLayoutManager);
-        back = findViewById(R.id.back);
+        ImageView back = findViewById(R.id.back);
 
         mBid = new ArrayList<>();
 
