@@ -1,10 +1,10 @@
 package com.example.vworld_project.Fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,15 +26,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
-public class ProjectsFragment extends Fragment {
+public class ProfileProjectsFragment extends Fragment {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 
     private ProjectAdapter projectAdapter;
     private RecyclerView recyclerView;
@@ -43,22 +39,24 @@ public class ProjectsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_projects, container, false);
+        ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_profile_projects, container, false);
 
         recyclerView = viewGroup.findViewById(R.id.recycle_view);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-        //LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        //recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setLayoutManager(layoutManager);
 
         mProjects = new ArrayList<>();
-        readMyProjects();
+
+        SharedPreferences sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences("Settings", 0);
+        String setting = sharedPreferences.getString("userId", "");
+
+        readMyProjects(setting);
 
         return viewGroup;
     }
 
-    private void readMyProjects(){
+    private void readMyProjects(final String user){
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         final FirebaseUser firebaseUser = auth.getCurrentUser();
@@ -73,7 +71,7 @@ public class ProjectsFragment extends Fragment {
                     Project project = snapshot.getValue(Project.class);
                     assert project != null;
                     assert firebaseUser != null;
-                    if (project.getOwnerid().equals(firebaseUser.getUid())){
+                    if (project.getOwnerid().equals(user)){
                         mProjects.add(project);
                     }
                 }

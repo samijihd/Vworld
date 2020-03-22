@@ -18,11 +18,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 public class ResetPasswordActivity extends AppCompatActivity {
 
-    private ImageView back;
     private EditText email_forget;
-    private Button submit;
 
     private FirebaseAuth auth;
     private FirebaseUser firebaseUser;
@@ -32,9 +32,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
 
-        back = findViewById(R.id.backto);
+        ImageView back = findViewById(R.id.backto);
         email_forget = findViewById(R.id.email_forget);
-        submit = findViewById(R.id.submit_forget);
+        Button submit = findViewById(R.id.submit_forget);
 
         auth = FirebaseAuth.getInstance();
 
@@ -62,7 +62,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                 startActivity(new Intent(ResetPasswordActivity.this , LoginActivity.class));
                             }
                             else {
-                                String msg = task.getException().getMessage();
+                                String msg = Objects.requireNonNull(task.getException()).getMessage();
                                 Toast.makeText(ResetPasswordActivity.this, msg, Toast.LENGTH_SHORT).show();
                             }
                         }

@@ -8,8 +8,11 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.vworld_project.Activity.MessageActivity;
+import com.example.vworld_project.Fragment.ProfileProjectsFragment;
 import com.example.vworld_project.Fragment.ProjectsFragment;
 import com.example.vworld_project.Fragment.ReviewFragment;
 import com.example.vworld_project.Model.User;
@@ -41,6 +45,14 @@ public class ProfileActivity extends AppCompatActivity {
 
     String userid;
 
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +75,19 @@ public class ProfileActivity extends AppCompatActivity {
 
         final Intent intent = getIntent();
         userid = intent.getStringExtra("userid");
+
+        SharedPreferences sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        //SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("userId", userid);
+        editor.apply();
+
+        setUserid(userid);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("userid", userid);
+        ProfileProjectsFragment profileProjectsFragment  = new ProfileProjectsFragment();
+        profileProjectsFragment.setArguments(bundle);
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = auth.getCurrentUser();
@@ -116,7 +141,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ProjectsFragment(), "PROJECTS");
+        adapter.addFragment(new ProfileProjectsFragment(), "PROJECTS");
         adapter.addFragment(new ReviewFragment(), "REVIEWS");
         viewPager.setAdapter(adapter);
     }
