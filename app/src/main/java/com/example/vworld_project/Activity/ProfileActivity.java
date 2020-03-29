@@ -43,6 +43,8 @@ public class ProfileActivity extends AppCompatActivity {
     private Button contact;
     private ImageView profile_image;
 
+    HomeActivity homeActivity = new HomeActivity();
+
     String userid;
 
     public String getUserid() {
@@ -84,10 +86,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         setUserid(userid);
 
-        Bundle bundle = new Bundle();
+        /*Bundle bundle = new Bundle();
         bundle.putString("userid", userid);
         ProfileProjectsFragment profileProjectsFragment  = new ProfileProjectsFragment();
-        profileProjectsFragment.setArguments(bundle);
+        profileProjectsFragment.setArguments(bundle);*/
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = auth.getCurrentUser();
@@ -174,5 +176,18 @@ public class ProfileActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        homeActivity.status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        homeActivity.status("offline");
     }
 }

@@ -13,6 +13,7 @@ import com.example.vworld_project.Fragment.BrowseFragment;
 import com.example.vworld_project.Fragment.MessagesFragment;
 import com.example.vworld_project.Fragment.MyprojectsFragment;
 import com.example.vworld_project.Fragment.PostFragment;
+import com.example.vworld_project.Fragment.SearchFragment;
 import com.example.vworld_project.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
         final MessagesFragment msgfragment = new MessagesFragment();
         final MyprojectsFragment myprojectfragment = new MyprojectsFragment();
         final PostFragment postFragment = new PostFragment();
-        final BrowseFragment browsefragment = new BrowseFragment();
+        final SearchFragment searchFragment = new SearchFragment();
         final AccountFragment accountFragment = new AccountFragment();
 
         if (savedInstanceState == null){
@@ -65,8 +66,8 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.postID:
                         setFragment(postFragment);
                         return true;
-                    case R.id.browseID:
-                        setFragment(browsefragment);
+                    case R.id.searchID:
+                        setFragment(searchFragment);
                         return true;
                     case R.id.accountID:
                         setFragment(accountFragment);
@@ -121,7 +122,7 @@ public class HomeActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    private void status(String status){
+    void status(String status){
         reference = firebaseDatabase.getReference("Users").child(firebaseUser.getUid());
 
         HashMap<String, Object> map = new HashMap<>();

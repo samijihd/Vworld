@@ -14,7 +14,7 @@
         android:icon="@drawable/post"
         android:title="Post" />
     <item
-        android:id="@+id/browseID"
+        android:id="@+id/searchID"
         android:icon="@drawable/search"
         android:title="Browse" />
     <item
