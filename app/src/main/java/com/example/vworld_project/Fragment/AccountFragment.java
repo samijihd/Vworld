@@ -19,11 +19,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.vworld_project.Activity.EditProfileActivity;
 import com.example.vworld_project.Activity.LoginActivity;
 import com.example.vworld_project.Model.User;
 import com.example.vworld_project.R;
@@ -58,6 +60,7 @@ public class  AccountFragment extends Fragment {
 
     private CircleImageView profile_image1;
     private TextView username, name, jobtitle, address;
+    private Button editProfile;
 
     private FirebaseAuth auth;
     private FirebaseUser firebaseUser;
@@ -88,6 +91,14 @@ public class  AccountFragment extends Fragment {
         name = viewGroup.findViewById(R.id.name_profile);
         jobtitle = viewGroup.findViewById(R.id.job_title);
         address = viewGroup.findViewById(R.id.address);
+
+        editProfile = viewGroup.findViewById(R.id.edit_profile);
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), EditProfileActivity.class));
+            }
+        });
 
         auth = FirebaseAuth.getInstance();
         firebaseUser = auth.getCurrentUser();

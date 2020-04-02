@@ -12,6 +12,16 @@
         android:layout_height="match_parent"
         tools:context=".Activity.ProfileActivity">
 
+        <ScrollView
+            android:id="@+id/upper_footer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/upper_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
         <RelativeLayout
             android:id="@+id/profile_header"
             android:layout_width="match_parent"
@@ -114,9 +124,12 @@
             app:civ_border_width="5dp"
             app:civ_border_color="@color/white"/>
 
+        </RelativeLayout>
+        </ScrollView>
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
-            android:layout_below="@id/under_profile_header"
+            android:layout_below="@id/upper_footer"
             app:tabIndicatorColor="@color/mainBackground"
             app:tabSelectedTextColor="@color/mainBackground"
             android:layout_width="match_parent"
