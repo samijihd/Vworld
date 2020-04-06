@@ -45,14 +45,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     String userid;
 
-    public String getUserid() {
-        return userid;
-    }
-
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,18 +68,11 @@ public class ProfileActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         userid = intent.getStringExtra("userid");
 
+        // let userID stored in memory, then get in ProfileProjectFragment to use it
         SharedPreferences sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        //SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("userId", userid);
         editor.apply();
-
-        setUserid(userid);
-
-        /*Bundle bundle = new Bundle();
-        bundle.putString("userid", userid);
-        ProfileProjectsFragment profileProjectsFragment  = new ProfileProjectsFragment();
-        profileProjectsFragment.setArguments(bundle);*/
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = auth.getCurrentUser();

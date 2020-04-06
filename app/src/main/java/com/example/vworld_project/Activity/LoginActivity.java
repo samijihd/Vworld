@@ -1,6 +1,8 @@
 package com.example.vworld_project.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -30,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText email;
     private EditText password;
-    public static CheckBox remember;
+    public CheckBox remember;
 
     private Button login;
     private FirebaseAuth auth;
@@ -53,20 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         FirebaseUser user = auth.getCurrentUser();
-
-
-       /* if(user != null){
-            startActivity(new Intent(LoginActivity.this , HomeActivity.class));
-            finish();
-        }*/
-
-       /*if (remember.isChecked()){
-           user_log = user;
-           Intent intent = new Intent(getBaseContext(), MainActivity.class);
-           intent.putExtra("user_log" , user_log);
-       }else{
-           user_log = null;
-       }*/
 
         forgetpassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +97,13 @@ public class LoginActivity extends AppCompatActivity {
                     password.setError("Empty!");
                     password.requestFocus();
                 }
+                else if (remember.isChecked()){
+                    @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = getSharedPreferences("login", MODE_PRIVATE)
+                            .edit();
+                    editor.putString("checked", "1");
+                    editor.apply();
+                    LoginUser(email_txt,password_txt);
+                }
                 else{
                     LoginUser(email_txt,password_txt);
                 }
@@ -121,7 +116,6 @@ public class LoginActivity extends AppCompatActivity {
         auth.signInWithEmailAndPassword(email , password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-
                 Toast.makeText(LoginActivity.this , "login successfully" , Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LoginActivity.this , HomeActivity.class));
                 finish();
@@ -134,9 +128,4 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-    public boolean setKey(boolean key){
-        return key;
-    }
-
 }

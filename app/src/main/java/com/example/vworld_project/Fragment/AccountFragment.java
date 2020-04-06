@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -149,6 +150,10 @@ public class  AccountFragment extends Fragment {
             @SuppressLint("ShowToast")
             @Override
             public void onClick(View view) {
+                SharedPreferences sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences("login", 0);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("isChecked", "0");
+                editor.apply();
                 auth.signOut();
                 startActivity(new Intent(Objects.requireNonNull(getActivity()).getApplicationContext()
                         , LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
