@@ -22,7 +22,7 @@
 
         <TextView
             android:id="@+id/loginlink_ID"
-            android:layout_toRightOf="@id/textView8"
+            android:layout_toEndOf="@id/textView8"
             android:layout_marginStart="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,10 +76,11 @@
             android:padding="10dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/login_txt_edit"
-            android:hint="Username"
+            android:hint="@string/username"
             android:inputType="textPersonName"
             android:textColorHint="#384E53"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="HardcodedText" />
 
         <EditText
             android:id="@+id/email_reg_ID"
@@ -90,7 +91,7 @@
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/login_txt_edit"
-            android:hint="Email Address"
+            android:hint="@string/email_address"
             android:inputType="textEmailAddress"
             android:textColorHint="#384E53"
             android:textSize="20sp" />
@@ -104,7 +105,7 @@
             android:padding="10dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/login_txt_edit"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:textColorHint="#384E53"
             android:textSize="20sp" />

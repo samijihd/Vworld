@@ -23,7 +23,7 @@
             android:id="@+id/title_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Place a bid on"
+            android:text="Title"
             android:textColor="#000"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -39,7 +39,8 @@
             android:textColor="#000"
             android:textSize="18sp"
             android:textStyle="normal"
-            android:layout_below="@id/title_header"/>
+            android:layout_below="@id/title_header"
+            tools:ignore="RtlSymmetry" />
 
     </RelativeLayout>
 
@@ -51,7 +52,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
 
             <RelativeLayout
@@ -64,7 +65,7 @@
                     android:id="@+id/paid_to_you"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Paid to you"
+                    android:text="budget"
                     android:textStyle="normal"
                     android:textSize="22sp"
                     android:textColor="#000"/>
@@ -115,7 +116,7 @@
                     android:id="@+id/deliver"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Deliver in"
+                    android:text="deliver_in"
                     android:textStyle="normal"
                     android:textSize="22sp"
                     android:textColor="#000"/>
@@ -145,7 +146,7 @@
                     android:id="@+id/days"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:text="Days"
+                    android:text="days"
                     android:layout_below="@id/deliver"
                     android:layout_marginTop="10dp"
                     android:layout_alignParentEnd="true"
@@ -167,7 +168,7 @@
                     android:id="@+id/description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Describe your bid"
+                    android:text="describe your bid"
                     android:textStyle="normal"
                     android:textSize="22sp"
                     android:textColor="#000"/>
@@ -201,7 +202,7 @@
                 android:id="@+id/bid_submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="place a bid"
+                android:text="bid"
                 android:textColor="@color/white"
                 android:padding="10dp"
                 android:textSize="22sp"
@@ -211,9 +212,5 @@
                 android:background="@drawable/bid_custom_btn"/>
 
         </RelativeLayout>
-
     </ScrollView>
-
-
-
 </RelativeLayout>
