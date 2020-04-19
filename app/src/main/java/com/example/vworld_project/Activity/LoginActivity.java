@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                 else if (remember.isChecked()){
                     @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = getSharedPreferences("login", MODE_PRIVATE)
                             .edit();
-                    editor.putString("checked", "1");
+                    editor.putString("isChecked", "1");
                     editor.apply();
                     LoginUser(email_txt,password_txt);
                 }

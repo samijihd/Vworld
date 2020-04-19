@@ -61,6 +61,9 @@ public class PostFragment extends Fragment {
 
         Button post = (Button) viewGroup.findViewById(R.id.post_project);
 
+
+        final String[] type = getResources().getStringArray(R.array.project_type);
+
         String[] types = new String[]{
                 "Website and IT",
                 "Mobile",
@@ -100,7 +103,7 @@ public class PostFragment extends Fragment {
                 " $ INR"
         };
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Objects.requireNonNull(getContext()), R.layout.spinner_item_project_type, types);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Objects.requireNonNull(getContext()), R.layout.spinner_item_project_type, type);
         adapter.setDropDownViewResource(R.layout.spinner_item_project_type);
         typeSpinner.setAdapter(adapter);
 

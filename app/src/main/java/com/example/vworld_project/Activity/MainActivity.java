@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = auth.getCurrentUser();
 
         SharedPreferences sharedPreferences = getSharedPreferences("login", 0);
-        String isChecked = sharedPreferences.getString("checked", "0");
+        String isChecked = sharedPreferences.getString("isChecked", "0");
         if (isChecked.equals("1")){
             if(firebaseUser != null){
                 startActivity(new Intent(MainActivity.this , HomeActivity.class));
@@ -34,10 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         Button btnlogin = findViewById(R.id.login_ID);
         TextView btnRegister = findViewById(R.id.register_ID);
