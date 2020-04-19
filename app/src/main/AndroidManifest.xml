@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.vworld_project">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,7 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.EditProfileActivity"></activity>
+        <activity android:name=".Activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.EditProfileActivity" />
         <activity android:name=".Activity.BidsListActivity" />
         <activity android:name=".Activity.BidActivity" />
         <activity android:name=".Activity.ProjectActivity" />
@@ -25,12 +33,8 @@
         <activity android:name=".Activity.HomeActivity" />
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity
+            android:name=".Activity.MainActivity">
         </activity>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
