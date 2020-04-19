@@ -1,10 +1,12 @@
 package com.example.vworld_project.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -53,6 +55,7 @@ public class ProjectActivity extends AppCompatActivity {
         assert projectid != null;
         DatabaseReference reference = firebaseDatabase.getReference("Project").child(projectid);
         reference.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -66,7 +69,10 @@ public class ProjectActivity extends AppCompatActivity {
                 description.setText(project.getDescription());
                 budget.setText(" $" + project.getBudget());
                 skill.setText(project.getSkill());
-                bids.setText(project.getBidno());
+                // to get count (number) of bids of the project
+                long count = dataSnapshot.child("Bids").getChildrenCount();
+                bids.setText(Long.toString(count));
+
             }
 
             @Override

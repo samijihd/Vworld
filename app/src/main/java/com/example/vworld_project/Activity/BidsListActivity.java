@@ -39,6 +39,8 @@ public class BidsListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bids_list);
 
+
+        // recycler view setting
         recyclerView = findViewById(R.id.recycle_bids_list);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -62,6 +64,7 @@ public class BidsListActivity extends AppCompatActivity {
         final FirebaseUser firebaseUser = auth.getCurrentUser();
         final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         assert projectId != null;
+        // reference to users to get their names and profile images
         final DatabaseReference usersRef = firebaseDatabase.getReference("Users");
         final DatabaseReference reference = firebaseDatabase.getReference("Project")
                 .child(projectId)
@@ -74,6 +77,8 @@ public class BidsListActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     final Bid bid = snapshot.getValue(Bid.class);
                     assert bid != null;
+                    // to make sure that bidders name and profile img is up to date
+                    // take them again from users list and bind them to appropriate place in bids list
                     usersRef.child(bid.getBidderId()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

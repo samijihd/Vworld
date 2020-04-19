@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +30,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 public class BidActivity extends AppCompatActivity {
+
+    private String bidsNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +60,14 @@ public class BidActivity extends AppCompatActivity {
             }
         });
 
+
+        //get user(bidder) 's name and image from Users row
+        //set bind them to bid row
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = auth.getCurrentUser();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         assert firebaseUser != null;
-        DatabaseReference userData = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        DatabaseReference userData = firebaseDatabase.getReference("Users").child(firebaseUser.getUid());
         userData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -113,7 +119,7 @@ public class BidActivity extends AppCompatActivity {
                 .child(projectid)
                 .child("Bids");
 
-        String id = reference.push().getKey();
+        String id = reference.push().getKey(); // get the id of the new item that will be inserted to db
 
         HashMap<String, Object> hashMap = new HashMap<>();
         assert firebaseUser != null;
