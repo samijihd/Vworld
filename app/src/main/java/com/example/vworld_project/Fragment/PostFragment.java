@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.Group;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
@@ -40,10 +41,7 @@ import java.util.Objects;
  */
 public class PostFragment extends Fragment {
 
-    private FirebaseUser firebaseUser;
-    private DatabaseReference reference;
-    Date currentTime;
-    String time;
+    private Date currentTime;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -147,18 +145,19 @@ public class PostFragment extends Fragment {
 
     private void postProject(final String title, String description, String type, String budget, String money, String skill) {
 
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
         currentTime = Calendar.getInstance().getTime();
         //time = currentTime.toString();
-        time = java.text.DateFormat.getDateTimeInstance().format(new Date());
+        String time = java.text.DateFormat.getDateTimeInstance().format(new Date());
 
         String id = reference.push().getKey();
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("id", id);
         hashMap.put("title", title);
+        assert firebaseUser != null;
         hashMap.put("ownerid", firebaseUser.getUid());
         hashMap.put("description", description);
         hashMap.put("type", type);
