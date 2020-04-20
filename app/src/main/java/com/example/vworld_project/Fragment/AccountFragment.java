@@ -180,7 +180,7 @@ public class  AccountFragment extends Fragment {
 
     private void uploadImage() {
         final ProgressDialog pd = new ProgressDialog(getContext());
-        pd.setMessage("Uploading");
+        pd.setMessage("Uploading...");
         pd.show();
 
         if (imageUri != null){

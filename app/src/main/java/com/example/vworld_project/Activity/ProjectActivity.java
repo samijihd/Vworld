@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ProjectActivity extends AppCompatActivity {
 
     String mTitle;
+    String ownerID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,8 @@ public class ProjectActivity extends AppCompatActivity {
                 // to get count (number) of bids of the project
                 long count = dataSnapshot.child("Bids").getChildrenCount();
                 bids.setText(Long.toString(count));
+
+                ownerID = project.getOwnerid();
 
             }
 
@@ -128,6 +131,7 @@ public class ProjectActivity extends AppCompatActivity {
                 //startActivity(new Intent(ProjectActivity.this, BidsListActivity.class));
                 Intent intent = new Intent(ProjectActivity.this  , BidsListActivity.class);
                 intent.putExtra("projectId" , projectid);
+                intent.putExtra("OwnerId", ownerID);
                 startActivity(intent);
             }
         });

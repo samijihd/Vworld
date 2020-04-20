@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -64,6 +66,13 @@ public class BidsListActivity extends AppCompatActivity {
         final FirebaseUser firebaseUser = auth.getCurrentUser();
         final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         assert projectId != null;
+        String ownerID = intent.getStringExtra("OwnerId");
+
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = getSharedPreferences("IDs", MODE_PRIVATE).edit();
+        editor.putString("OwnerId", ownerID);
+        editor.putString("ProjectId", projectId);
+        editor.apply();
+        
         // reference to users to get their names and profile images
         final DatabaseReference usersRef = firebaseDatabase.getReference("Users");
         final DatabaseReference reference = firebaseDatabase.getReference("Project")
@@ -111,7 +120,10 @@ public class BidsListActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = getSharedPreferences("IDs", MODE_PRIVATE).edit();
+                editor.putString("OwnerId", "");
+                editor.putString("ProjectId", "");
+                editor.apply();
             }
         });
 
