@@ -72,7 +72,7 @@ public class BidsListActivity extends AppCompatActivity {
         editor.putString("OwnerId", ownerID);
         editor.putString("ProjectId", projectId);
         editor.apply();
-        
+
         // reference to users to get their names and profile images
         final DatabaseReference usersRef = firebaseDatabase.getReference("Users");
         final DatabaseReference reference = firebaseDatabase.getReference("Project")

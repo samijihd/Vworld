@@ -18,11 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.vworld_project.Model.Bid;
 import com.example.vworld_project.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class BidAdapter extends RecyclerView.Adapter<BidAdapter.ViewHolder> {
@@ -61,37 +64,46 @@ public class BidAdapter extends RecyclerView.Adapter<BidAdapter.ViewHolder> {
             Glide.with(mContext).load(bid.getImageURL()).into(holder.profile_image);
         }
 
-       /*holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext , BidsListActivity.class);
-                intent.putExtra("projectId" , bid.getProjectId());
-                mContext.startActivity(intent);
-            }
-        });*/
-
        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
            @Override
            public boolean onLongClick(View view) {
                String OwnerID = sharedPreferences.getString("OwnerId", "");
+               final String projectID = sharedPreferences.getString("ProjectId", "");
                FirebaseAuth auth = FirebaseAuth.getInstance();
                FirebaseUser firebaseUser = auth.getCurrentUser();
                assert firebaseUser != null;
-               //Toast.makeText(mContext, OwnerID, Toast.LENGTH_LONG).show();
                if (firebaseUser.getUid().equals(OwnerID)){
                    dialog = new AlertDialog.Builder(mContext);
-                   dialog.setTitle("Accept Bid")
-                   .setMessage("Do you want to accept this Bid?")
-                   .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                   dialog.setTitle("Accept Bid");
+                   dialog.setMessage("Do you want to accept this Bid?");
+                   dialog.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                        @Override
                        public void onClick(DialogInterface dialogInterface, int i) {
+                           final HashMap<String, Object> hashMap = new HashMap<>();
+                           hashMap.put("isAccepted", "true");
+                           hashMap.put("isVisible", "false");
                            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                           //DatabaseReference reference = firebaseDatabase.getReference("Project").child()
-
+                                    firebaseDatabase
+                                   .getReference("Project")
+                                   .child(projectID)
+                                   .updateChildren(hashMap)
+                                   .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                       @Override
+                                       public void onComplete(@NonNull Task<Void> task) {
+                                           Toast.makeText(mContext, "The bid accepted successfully",
+                                                   Toast.LENGTH_LONG).show();
+                                       }
+                                   }).addOnFailureListener(new OnFailureListener() {
+                                       @Override
+                                       public void onFailure(@NonNull Exception e) {
+                                           Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_LONG).show();
+                                       }
+                                   });
                        }
-                   }).setNegativeButton("Cancel", null)
-                   .setIcon(android.R.drawable.ic_dialog_alert)
-                   .show();
+                   });
+                   dialog.setNegativeButton("Cancel", null);
+                   dialog.setIcon(android.R.drawable.ic_dialog_alert);
+                   dialog.show();
                }
                return true;
            }
