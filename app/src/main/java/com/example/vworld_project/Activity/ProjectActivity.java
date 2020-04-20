@@ -3,6 +3,7 @@ package com.example.vworld_project.Activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,8 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.vworld_project.Model.Bid;
 import com.example.vworld_project.Model.Project;
+import com.example.vworld_project.Model.User;
 import com.example.vworld_project.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,7 +28,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 public class ProjectActivity extends AppCompatActivity {
 
@@ -41,6 +50,11 @@ public class ProjectActivity extends AppCompatActivity {
         final Button bid = (Button) findViewById(R.id.bid_btn);
         bid.setEnabled(true);
 
+        final CardView profile_card = findViewById(R.id.profile_card);
+        final CircleImageView profile_image = findViewById(R.id.profile_image);
+        final TextView name = findViewById(R.id.name);
+        final TextView username = findViewById(R.id.username);
+
         final TextView title = findViewById(R.id.title);
         final TextView date = findViewById(R.id.date);
         final TextView description = findViewById(R.id.description);
@@ -51,10 +65,48 @@ public class ProjectActivity extends AppCompatActivity {
 
         final Intent intent = getIntent();
         final String projectid = intent.getStringExtra("projectid");
+        ownerID = intent.getStringExtra("OwnerId");
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         final FirebaseUser firebaseUser = auth.getCurrentUser();
         final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+
+        //bind post owner profile image and data
+                firebaseDatabase
+                .getReference("Users")
+                .child(ownerID)
+                .addValueEventListener(new ValueEventListener() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.getValue(User.class);
+                        assert user != null;
+                        name.setText(user.getName());
+                        username.setText("@" + user.getUsername());
+                        if (user.getImageURL().equals("default")){
+                            profile_image.setImageResource(R.mipmap.ic_launcher);
+                        }
+                        else{
+                            Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(getApplicationContext(), databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                profile_card.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext() , ProfileActivity.class);
+                        intent.putExtra("userid" , ownerID);
+                        startActivity(intent);
+                    }
+                });
+
+
         assert projectid != null;
         final DatabaseReference reference = firebaseDatabase.getReference("Project").child(projectid);
         reference.addValueEventListener(new ValueEventListener() {

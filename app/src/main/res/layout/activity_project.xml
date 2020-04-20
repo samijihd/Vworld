@@ -45,6 +45,7 @@
         android:layout_below="@id/header">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/profile_card"
             android:background="@color/gray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
