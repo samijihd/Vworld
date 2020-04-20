@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 public class ProjectActivity extends AppCompatActivity {
 
     String mTitle;
@@ -54,7 +56,7 @@ public class ProjectActivity extends AppCompatActivity {
         final FirebaseUser firebaseUser = auth.getCurrentUser();
         final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         assert projectid != null;
-        DatabaseReference reference = firebaseDatabase.getReference("Project").child(projectid);
+        final DatabaseReference reference = firebaseDatabase.getReference("Project").child(projectid);
         reference.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @SuppressLint("SetTextI18n")
@@ -73,6 +75,11 @@ public class ProjectActivity extends AppCompatActivity {
                 // to get count (number) of bids of the project
                 long count = dataSnapshot.child("Bids").getChildrenCount();
                 bids.setText(Long.toString(count));
+
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("bidno", Long.toString(count));
+
+                reference.updateChildren(hashMap);
 
                 ownerID = project.getOwnerid();
 
