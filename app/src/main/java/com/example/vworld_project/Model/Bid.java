@@ -11,7 +11,7 @@ public class Bid {
     private String day;
     private String description;
 
-    public Bid(String id, String paid, String projectId, String bidderId, String imageURL, String name,  String day, String description) {
+    public Bid(String id, String paid, String projectId, String bidderId, String imageURL, String name, String day, String description) {
         this.id = id;
         this.paid = paid;
         this.imageURL = imageURL;
@@ -89,4 +89,6 @@ public class Bid {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
 }

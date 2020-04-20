@@ -81,7 +81,9 @@ public class MyprojectsFragment extends Fragment {
                 mProjects.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Project project = snapshot.getValue(Project.class);
-                    mProjects.add(project);
+                    if (project.getIsAccepted().equals("false") && project.getIsVisible().equals("true")){
+                        mProjects.add(project);
+                    }
                 }
                 projectAdapter = new ProjectAdapter(getContext(), mProjects);
                 recyclerView.setAdapter(projectAdapter);

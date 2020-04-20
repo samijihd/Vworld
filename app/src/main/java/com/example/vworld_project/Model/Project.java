@@ -10,11 +10,13 @@ public class Project {
     private String description;
     private String time;
     private String bids;
-    private String  bidno;
+    private String bidno;
     private String budget;
     private String skill;
+    private String isAccepted;
+    private String isVisible;
 
-    public Project(String id, String projectid, String ownerid, String type, String title, String description, String time, String bids, String bidno, String budget, String skill) {
+    public Project(String id, String projectid, String ownerid, String type, String title, String description, String time, String bids, String bidno, String budget, String skill, String isAccepted, String isVisible) {
         this.id = id;
         this.projectid = projectid;
         this.ownerid = ownerid;
@@ -26,6 +28,8 @@ public class Project {
         this.bidno = bidno;
         this.budget = budget;
         this.skill = skill;
+        this.isAccepted = isAccepted;
+        this.isVisible = isVisible;
     }
 
     public Project(){
@@ -118,5 +122,21 @@ public class Project {
 
     public void setSkill(String skill) {
         this.skill = skill;
+    }
+
+    public String getIsAccepted() {
+        return isAccepted;
+    }
+
+    public void setIsAccepted(String isAccepted) {
+        this.isAccepted = isAccepted;
+    }
+
+    public String getIsVisible() {
+        return isVisible;
+    }
+
+    public void setIsVisible(String isVisible) {
+        this.isVisible = isVisible;
     }
 }

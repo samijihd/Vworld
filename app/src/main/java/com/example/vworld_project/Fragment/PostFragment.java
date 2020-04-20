@@ -169,6 +169,8 @@ public class PostFragment extends Fragment {
         hashMap.put("skill", skill);
         hashMap.put("bidno", " 0");
         hashMap.put("time", time);
+        hashMap.put("isAccepted", "false");
+        hashMap.put("isVisible", "true");
 
         assert id != null;
         reference.child("Project").child(id).setValue(hashMap, new DatabaseReference.CompletionListener() {

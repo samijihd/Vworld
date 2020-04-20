@@ -106,7 +106,6 @@ public class BidsListActivity extends AppCompatActivity {
 
                 mBid.clear();
                 for (DataSnapshot snapshot1 : dataSnapshot.getChildren()){
-
                     final Bid bid = snapshot1.getValue(Bid.class);
                     mBid.add(bid);
                 }

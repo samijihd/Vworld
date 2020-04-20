@@ -71,7 +71,9 @@ public class ProfileProjectsFragment extends Fragment {
                     Project project = snapshot.getValue(Project.class);
                     assert project != null;
                     assert firebaseUser != null;
-                    if (project.getOwnerid().equals(user)){
+                    if (project.getOwnerid().equals(user)
+                            && project.getIsAccepted().equals("false")
+                            && project.getIsVisible().equals("true")){
                         mProjects.add(project);
                     }
                 }

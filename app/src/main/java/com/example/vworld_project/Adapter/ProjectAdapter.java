@@ -39,6 +39,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
         final Project project = mProjects.get(position);
         holder.title.setText(project.getTitle());
         holder.time.setText(project.getTime());
+
         holder.bids.setText(project.getBidno());
         holder.budget.setText(project.getBudget());
 
