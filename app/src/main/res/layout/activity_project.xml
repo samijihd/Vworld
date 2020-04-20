@@ -35,8 +35,77 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/sub_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@id/header">
+
+        <androidx.cardview.widget.CardView
+            android:background="@color/gray"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:cardCornerRadius="20dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_margin="15dp"
+                    android:src="@mipmap/ic_launcher"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/profile_image">
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="publisher name"
+                        android:textStyle="bold"
+                        android:textColor="#000"
+                        android:textSize="20sp"/>
+                    <TextView
+                        android:id="@+id/username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="username"
+                        android:layout_below="@+id/name"/>
+                    <RatingBar
+                        style = "?android:attr/ratingBarStyleIndicator"
+                        android:id="@+id/rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:saveEnabled="true"
+                        android:scaleX=".8"
+                        android:rating="3.5"
+                        android:scaleY=".8"
+                        android:transformPivotX="0dp"
+                        android:transformPivotY="0dp"
+                        android:numStars="5"
+                        android:layout_below="@id/username"
+                        android:theme="@style/RatingBar"/>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+
     <ScrollView
-        android:layout_below="@id/header"
+        android:layout_below="@id/sub_header"
         android:layout_above="@id/footer"
         android:background="@drawable/project_body"
         android:paddingTop="15dp"
@@ -52,6 +121,7 @@
             >
 
             <RelativeLayout
+                android:id="@+id/sub_body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -72,14 +142,14 @@
                     android:layout_marginTop="5dp"
                     android:text="16 Mar 2020 21:09:54"
                     android:textColor="@color/blue"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textStyle="normal"/>
 
                 <TextView
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/nothing"
+                    android:text="Description"
                     android:textSize="18sp"
                     android:textColor="#000"
                     android:layout_below="@id/date"

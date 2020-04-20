@@ -11,4 +11,6 @@
     <color name="whiteTrans">#FAFAFB</color>
     <color name="normal_gray">#F6F7F9</color>
     <color name="gray">#e6e6e6</color>
+    <color name="duskYellow">#ffc922</color>
+    <color name="lightGrey">#D3D3D3</color>
 </resources>
