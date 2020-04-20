@@ -108,6 +108,21 @@
         app:civ_border_width="5dp"
         app:civ_border_color="@color/white"/>
 
+    <RatingBar
+        style = "?android:attr/ratingBarStyleIndicator"
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:saveEnabled="true"
+        android:rating="3.5"
+        android:transformPivotX="0dp"
+        android:transformPivotY="0dp"
+        android:numStars="5"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/profile_img"
+        android:theme="@style/RatingBar"/>
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_below="@id/under_profile_header"
