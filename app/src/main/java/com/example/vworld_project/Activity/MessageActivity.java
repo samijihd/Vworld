@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.MaskFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -45,6 +46,8 @@ public class MessageActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     DatabaseReference reference;
     FirebaseDatabase firebaseDatabase;
+
+    private ValueEventListener seenListener;
 
 
     @Override
@@ -87,7 +90,7 @@ public class MessageActivity extends AppCompatActivity {
                 message_text.setText("");
             }
         });
-
+        seenMessage(userid);
         assert userid != null;
         reference = firebaseDatabase.getReference("Users").child(userid);
         reference.addValueEventListener(new ValueEventListener() {
@@ -131,6 +134,7 @@ public class MessageActivity extends AppCompatActivity {
         map.put("message", message);
         map.put("sender", sender);
         map.put("receiver", receiver);
+        map.put("isSeen", "false");
 
         reference.child("Messages").push().setValue(map);
 
@@ -150,7 +154,31 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    private void seenMessage(final String userId){
+        reference = firebaseDatabase.getReference("Messages");
+        seenListener = reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Message message = snapshot.getValue(Message.class);
+
+                    assert message != null;
+                    if (message.getReceiver().equals(firebaseUser.getUid())
+                            && message.getSender().equals(userId)){
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("isSeen", "true");
+                        snapshot.getRef().updateChildren(hashMap);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(), databaseError.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void readMessages(final String myid, final String userid, final String imageurl){
@@ -181,5 +209,27 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void status(String status){
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("status", status);
+
+        reference.updateChildren(hashMap);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        reference.removeEventListener(seenListener);
+        status("offline");
     }
 }

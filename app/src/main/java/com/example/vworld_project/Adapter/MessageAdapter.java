@@ -1,5 +1,6 @@
 package com.example.vworld_project.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,14 +42,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public MessageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if(viewType == MSG_RIGHT ) {
             View view = LayoutInflater.from(mContext).inflate(R.layout.message_item_right, parent, false);
-            return new MessageAdapter.ViewHolder(view);
+            return new ViewHolder(view);
         }
         else{
             View view = LayoutInflater.from(mContext).inflate(R.layout.message_item_left, parent, false);
-            return new MessageAdapter.ViewHolder(view);
+            return new ViewHolder(view);
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder holder, int position) {
         Message message = mMessage.get(position);
@@ -60,6 +62,21 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         else {
             Glide.with(mContext).load(imageurl).into(holder.profile_image);
         }
+
+        //get last message
+        if (position == mMessage.size()-1){
+            if (message.getIsSeen().equals("true")){
+                holder.isSeen.setText("Seen");
+            }
+            else
+            {
+                holder.isSeen.setText("Delivered");
+            }
+        }
+        else
+        {
+            holder.isSeen.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -67,16 +84,18 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         return mMessage.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder{
 
-        public ImageView profile_image;
-        public TextView message_text;
+        ImageView profile_image;
+        TextView message_text, isSeen;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             message_text = itemView.findViewById(R.id.msg_text);
             profile_image = itemView.findViewById(R.id.profile_image);
+            isSeen = itemView.findViewById(R.id.seen);
+
         }
     }
 

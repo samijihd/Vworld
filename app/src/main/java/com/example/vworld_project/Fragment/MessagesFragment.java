@@ -33,10 +33,9 @@ public class MessagesFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
-    FirebaseAuth auth;
-    FirebaseUser firebaseUser;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference reference;
+    private FirebaseAuth auth;
+    private FirebaseUser firebaseUser;
+    private DatabaseReference reference;
 
     private UserAdapter userAdapter;
     private List<User> mUsers;
