@@ -155,7 +155,9 @@ public class ProjectActivity extends AppCompatActivity {
                     assert bid1 != null;
                     if (bid1.getBidderId().equals(firebaseUser.getUid())){
                         bid.setEnabled(false);
-                        Toast.makeText(ProjectActivity.this, "You had already bid for this project", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ProjectActivity.this,
+                                "You had already bid for this project",
+                                Toast.LENGTH_LONG).show();
                     }
                 }
             }

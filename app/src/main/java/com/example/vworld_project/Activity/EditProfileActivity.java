@@ -41,16 +41,13 @@ public class EditProfileActivity extends AppCompatActivity {
         final EditText lastName = findViewById(R.id.last_name);
         final EditText jobTitle = findViewById(R.id.job_title);
         final EditText username = findViewById(R.id.username);
-
-        // the address will be viewed by spinner list
-        // the items will be taken from array-string from string.xml
-        // i don't have internet now, so i can not do it right now !!
+        
         final EditText address = findViewById(R.id.address);
 
-        RadioGroup genderGroup = findViewById(R.id.radioGroup);
-        RadioButton male = findViewById(R.id.male);
-        RadioButton female = findViewById(R.id.female);
-        RadioButton other = findViewById(R.id.other);
+        final RadioGroup genderGroup = findViewById(R.id.radioGroup);
+        final RadioButton male = findViewById(R.id.male);
+        final RadioButton female = findViewById(R.id.female);
+        final RadioButton other = findViewById(R.id.other);
 
         Button save = findViewById(R.id.save);
         ImageView back = findViewById(R.id.back);
@@ -79,6 +76,17 @@ public class EditProfileActivity extends AppCompatActivity {
                 jobTitle.setText(user.getJobtitle());
                 username.setText(user.getUsername());
                 address.setText(user.getAddress());
+                switch (user.getGender()) {
+                    case "male":
+                        male.setChecked(true);
+                        break;
+                    case "female":
+                        female.setChecked(true);
+                        break;
+                    case "other":
+                        other.setChecked(true);
+                        break;
+                }
             }
 
             @Override
@@ -95,6 +103,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 String job_title = jobTitle.getText().toString().trim();
                 String user_name = username.getText().toString().trim();
                 String address_text = address.getText().toString().trim();
+                String gender = "";
 
                 if (TextUtils.isEmpty(first_name)){
                     firstName.setError("Empty!");
@@ -111,16 +120,27 @@ public class EditProfileActivity extends AppCompatActivity {
                 } else if (TextUtils.isEmpty(address_text)){
                     address.setError("Empty!");
                     address.requestFocus();
+                } else if (male.isChecked()){
+                    gender = "male";
+                    saveEditedData(first_name, last_name, user_name, job_title, address_text, gender);
+                } else if (female.isChecked()){
+                    gender = "female";
+                    saveEditedData(first_name, last_name, user_name, job_title, address_text, gender);
+                } else if (other.isChecked()){
+                    gender = "other";
+                    saveEditedData(first_name, last_name, user_name, job_title, address_text, gender);
+                } else if (!male.isChecked() && !female.isChecked() && !other.isChecked()){
+                    Toast.makeText(getApplicationContext(), "Please select your gender", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
-                    saveEditedData(first_name, last_name, user_name, job_title, address_text);
+                    saveEditedData(first_name, last_name, user_name, job_title, address_text, gender);
                 }
             }
         });
     }
 
-    private void saveEditedData(String first_name, String last_name, String user_name, String job_title, String address_text) {
+    private void saveEditedData(String first_name, String last_name, String user_name, String job_title, String address_text, String gender) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = auth.getCurrentUser();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -134,6 +154,7 @@ public class EditProfileActivity extends AppCompatActivity {
         hashMap.put("username", user_name);
         hashMap.put("jobtitle",job_title);
         hashMap.put("address", address_text);
+        hashMap.put("gender", gender);
 
         reference.updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

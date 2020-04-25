@@ -10,8 +10,9 @@ public class User {
     private String address;
     private String status;
     private String search;
+    private String gender;
 
-    public User(String id,String name, String username, String imageURL, String jobtitle, String address, String status, String search) {
+    public User(String id,String name, String username, String imageURL, String jobtitle, String address, String status, String search, String gender) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -20,6 +21,7 @@ public class User {
         this.address = address;
         this.status = status;
         this.search = search;
+        this.gender = gender;
     }
 
     public User() {
@@ -88,5 +90,13 @@ public class User {
 
     public void setSearch(String search) {
         this.search = search;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

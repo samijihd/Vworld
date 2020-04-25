@@ -64,44 +64,9 @@ public class PostFragment extends Fragment {
 
         final String[] type = getResources().getStringArray(R.array.project_type);
 
-        String[] types = new String[]{
-                "Website and IT",
-                "Mobile",
-                "Art and Design",
-                "Data Entry",
-                "Software Dev",
-                "Writing",
-                "Business",
-                "Sales",
-                "Contest",
-                "Local Jobs",
-                "Other"
-        };
+        final String[] budget = getResources().getStringArray(R.array.Budgets);
 
-        String[] budget = new String[]{
-                " 10 - 30",
-                " 30 - 250",
-                " 250 - 750",
-                " 750 - 1500",
-                " 1500 - 3000",
-                " 3000 - 5000",
-                " 5000 - 10000",
-                " 10000 - 20000",
-                " 20000 - 50000",
-                " 50000 +"
-        };
-
-        String[] money = new String[]{
-                " $ USD",
-                " $ NZD",
-                " $ AUD",
-                " $ GBP",
-                " $ HKD",
-                " $ SGD",
-                " $ EUR",
-                " $ CAD",
-                " $ INR"
-        };
+        final String[] money = getResources().getStringArray(R.array.money_type);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(Objects.requireNonNull(getContext()), R.layout.spinner_item_project_type, type);
         adapter.setDropDownViewResource(R.layout.spinner_item_project_type);

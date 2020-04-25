@@ -76,44 +76,6 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-/*
-        nav_View.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-
-                try {
-                    if(id == R.id.msgID){
-                        setFragment(msgfragment);
-                        return true;
-                    }
-                    else if(id == R.id.projectID){
-                        setFragment(myprojectfragment);
-                        return  true;
-                    }
-                    else if(id == R.id.postID){
-                        setFragment(postFragment);
-                        return true;
-                    }
-                    else if(id == R.id.browseID){
-                        setFragment(browsefragment);
-                        return true;
-                    }
-                    else if(id == R.id.accountID){
-                        setFragment(accountFragment);
-                        return true;
-                    }
-                    return true;
-
-                }
-                catch (Exception e){
-                    Toast.makeText(HomeActivity.this , e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                }
-                return true;
-            }
-        });*/
-
     }
 
     private void setFragment(Fragment fragment){

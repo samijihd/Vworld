@@ -79,21 +79,27 @@ public class RegisterActivity extends AppCompatActivity {
                 String copassword_txt = copassowrd.getText().toString().trim();
 
                 if(TextUtils.isEmpty(username_txt)){
-                    Toast.makeText(RegisterActivity.this , "Enter a username" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this
+                            , "Enter a username"
+                            , Toast.LENGTH_LONG).show();
                     username.setError("Empty!");
                     username.requestFocus();
                 } else if (username_txt.contains(" ")){
-                    Toast.makeText(RegisterActivity.this , "Username should not contains a space!" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this
+                            , "Username should not contains a space!"
+                            , Toast.LENGTH_LONG).show();
                     username.setError("Username should not contains a space!");
                     username.requestFocus();
                 }
                 else if(TextUtils.isEmpty(email_txt)){
-                    Toast.makeText(RegisterActivity.this , "Enter a email" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this , "Enter a email"
+                            , Toast.LENGTH_LONG).show();
                     email.setError("Empty!");
                     email.requestFocus();
                 }
                 else if(TextUtils.isEmpty(password_txt) || password_txt.length() < 6){
-                    Toast.makeText(RegisterActivity.this , "Make sure that the password is longer than 6 char" ,
+                    Toast.makeText(RegisterActivity.this
+                            , "Make sure that the password is longer than 6 char" ,
                             Toast.LENGTH_LONG).show();
                     password.setError("rewrite password!");
                     password.requestFocus();
@@ -137,6 +143,7 @@ public class RegisterActivity extends AppCompatActivity {
                         hashMap.put("address", "Address: N/A");
                         hashMap.put("status", "offline");
                         hashMap.put("search", user.toLowerCase());
+                        hashMap.put("gender", "default");
 
                         //insert hash map to firebase realtime database
                         reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -153,13 +160,14 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                     else {
                         Toast.makeText(RegisterActivity.this ,
-                                "you cant register now try again later!" ,
+                                "You can't register right now, try again later!" ,
                                 Toast.LENGTH_LONG).show();
                     }
                 }
                 catch (Exception e){
                     Toast.makeText(RegisterActivity.this ,
-                            e.getLocalizedMessage().toString() , Toast.LENGTH_LONG).show();
+                            "ERROR: "+e.getLocalizedMessage(),
+                            Toast.LENGTH_LONG).show();
                 }
             }
         });

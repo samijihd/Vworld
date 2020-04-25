@@ -31,7 +31,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
     @Override
     public ProjectAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.project_item, parent, false);
-        return new ProjectAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
         return mProjects.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView title, time, bids, budget;
 

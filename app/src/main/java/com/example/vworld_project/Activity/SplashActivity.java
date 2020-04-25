@@ -9,16 +9,19 @@ import android.os.Handler;
 import com.example.vworld_project.R;
 
 public class SplashActivity extends AppCompatActivity {
+
+    // boolean variable to record the state of the splash screen
     private static boolean splashLoaded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_splash);
 
+        // make app waiting for a few seconds then change boolean to true
         if (!splashLoaded) {
+            //bind splash screen
             setContentView(R.layout.activity_splash);
-            int secondsDelayed = 4;
+            int secondsDelayed = 2;
             new Handler().postDelayed(new Runnable() {
                 public void run() {
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));

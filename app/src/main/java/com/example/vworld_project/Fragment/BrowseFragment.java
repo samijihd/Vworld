@@ -104,7 +104,11 @@ public class BrowseFragment extends Fragment {
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
 
-        Query query = firebaseDatabase.getReference("Users").orderByChild("search").startAt(s).endAt(s + "\uf8ff");
+        Query query = firebaseDatabase
+                .getReference("Users")
+                .orderByChild("search")
+                .startAt(s)
+                .endAt(s + "\uf8ff");
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

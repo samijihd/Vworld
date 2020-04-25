@@ -134,7 +134,7 @@
                 android:transformPivotX="0dp"
                 android:transformPivotY="0dp"
                 android:numStars="5"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
                 android:layout_below="@id/profile_img"
                 android:theme="@style/RatingBar"/>

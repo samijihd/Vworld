@@ -25,16 +25,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static FirebaseUser user_log = null;
-
-    private ImageView back;
-    private TextView register, forgetpassword;
-
     private EditText email;
     private EditText password;
     public CheckBox remember;
 
-    private Button login;
     private FirebaseAuth auth;
 
     @Override
@@ -42,19 +36,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        back = findViewById(R.id.back_ID);
-        register = findViewById(R.id.register_ID);
+        ImageView back = findViewById(R.id.back_ID);
+        TextView register = findViewById(R.id.register_ID);
 
         email = findViewById(R.id.user_reg_ID);
         password = findViewById(R.id.pass_reg_ID);
         remember = findViewById(R.id.remember_ID);
-        forgetpassword = findViewById(R.id.forget_ID);
+        TextView forgetpassword = findViewById(R.id.forget_ID);
 
-
-        login = findViewById(R.id.signupbtn_reg_ID);
+        Button login = findViewById(R.id.signupbtn_reg_ID);
         auth = FirebaseAuth.getInstance();
-
-        FirebaseUser user = auth.getCurrentUser();
 
         forgetpassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 String email_txt = email.getText().toString().trim();
                 String password_txt = password.getText().toString().trim();
@@ -119,7 +109,6 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this , "login successfully" , Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LoginActivity.this , HomeActivity.class));
                 finish();
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
