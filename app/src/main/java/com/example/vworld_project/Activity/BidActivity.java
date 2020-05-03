@@ -32,6 +32,8 @@ public class BidActivity extends AppCompatActivity {
 
     private String bidsNumber;
 
+    FirebaseUser firebaseUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class BidActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         final String mTitle = intent.getStringExtra("title");
         final String projectid = intent.getStringExtra("projectid");
+        final String ownerID = intent.getStringExtra("OwnerId");
         title.setText(mTitle);
 
         final String[] imgUrl = new String[1];
@@ -63,14 +66,13 @@ public class BidActivity extends AppCompatActivity {
         //get user(bidder) 's name and image from Users row
         //set bind them to bid row
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = auth.getCurrentUser();
+        firebaseUser = auth.getCurrentUser();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         assert firebaseUser != null;
         DatabaseReference userData = firebaseDatabase.getReference("Users").child(firebaseUser.getUid());
         userData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //String url = dataSnapshot.child("imageURL").getValue().toString();
                 User user = dataSnapshot.getValue(User.class);
                 assert user != null;
                 imgUrl[0] = user.getImageURL();
@@ -102,13 +104,13 @@ public class BidActivity extends AppCompatActivity {
                     description.requestFocus();
                 }
                 else {
-                    submitBid(paid_txt, day_txt, description_txt, projectid, imgUrl, name);
+                    addBid(ownerID, paid_txt, day_txt, description_txt, projectid, imgUrl, name);
                 }
             }
         });
     }
 
-    private void submitBid(String paid, String day, String description, String projectid, String[] imgUrl, String[] name) {
+    private void addBid(String ownerID,String paid, String day, String description, String projectid, String[] imgUrl, String[] name) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = auth.getCurrentUser();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -130,6 +132,10 @@ public class BidActivity extends AppCompatActivity {
         hashMap.put("paid", paid);
         hashMap.put("day", day);
         hashMap.put("description", description);
+        hashMap.put("isAccepted", "false");
+        hashMap.put("isVisible", "true");
+
+        addNotification(ownerID, projectid, name[0]);
 
         assert id != null;
         reference.child(id).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -144,6 +150,19 @@ public class BidActivity extends AppCompatActivity {
                 Toast.makeText(BidActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
 
+    private void addNotification(String userID, String projectID, String name){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(userID);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("userID", firebaseUser.getUid());
+        hashMap.put("title", "**New bid**");
+        hashMap.put("text", name + " added bid for your project");
+        hashMap.put("projectID", projectID);
+        hashMap.put("ownerID", userID);
+        hashMap.put("isProject", "true");
+
+        reference.push().setValue(hashMap);
     }
 }

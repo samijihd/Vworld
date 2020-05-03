@@ -28,13 +28,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 public class ProjectActivity extends AppCompatActivity {
 
@@ -139,7 +136,7 @@ public class ProjectActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(getApplicationContext(), databaseError.getMessage().toString(), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -164,20 +161,24 @@ public class ProjectActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(getApplicationContext(), databaseError.getMessage().toString(), Toast.LENGTH_LONG).show();
             }
         });
 
+        //open bid page to add new bid
         bid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ProjectActivity.this , BidActivity.class);
                 intent.putExtra("projectid", projectid);
                 intent.putExtra("title", mTitle);
+                intent.putExtra("OwnerId", ownerID);
                 startActivity(intent);
             }
         });
 
+
+        // finish this activity
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -186,10 +187,10 @@ public class ProjectActivity extends AppCompatActivity {
         });
 
 
+        // open bids list
         seeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivity(new Intent(ProjectActivity.this, BidsListActivity.class));
                 Intent intent = new Intent(ProjectActivity.this  , BidsListActivity.class);
                 intent.putExtra("projectId" , projectid);
                 intent.putExtra("OwnerId", ownerID);
