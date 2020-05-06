@@ -136,6 +136,9 @@ public class PostFragment extends Fragment {
         hashMap.put("time", time);
         hashMap.put("isAccepted", "false");
         hashMap.put("isVisible", "true");
+        hashMap.put("finishedWork", null);
+        hashMap.put("completed", "false");
+        hashMap.put("rated", "false");
 
         assert id != null;
         reference.child("Project").child(id).setValue(hashMap, new DatabaseReference.CompletionListener() {

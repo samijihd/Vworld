@@ -132,10 +132,8 @@ public class BidActivity extends AppCompatActivity {
         hashMap.put("paid", paid);
         hashMap.put("day", day);
         hashMap.put("description", description);
-        hashMap.put("isAccepted", "false");
-        hashMap.put("isVisible", "true");
 
-        addNotification(ownerID, projectid, name[0]);
+        addNotification(ownerID, projectid, name[0], id);
 
         assert id != null;
         reference.child(id).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -152,7 +150,7 @@ public class BidActivity extends AppCompatActivity {
         });
     }
 
-    private void addNotification(String userID, String projectID, String name){
+    private void addNotification(String userID, String projectID, String name, String bidId){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(userID);
 
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -161,7 +159,8 @@ public class BidActivity extends AppCompatActivity {
         hashMap.put("text", name + " added bid for your project");
         hashMap.put("projectID", projectID);
         hashMap.put("ownerID", userID);
-        hashMap.put("isProject", "true");
+        hashMap.put("notifyType", "newBid");
+        hashMap.put("bidId", bidId);
 
         reference.push().setValue(hashMap);
     }

@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
@@ -67,7 +68,7 @@ public class BidAdapter extends RecyclerView.Adapter<BidAdapter.ViewHolder> {
        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
            @Override
            public boolean onLongClick(View view) {
-               String OwnerID = sharedPreferences.getString("OwnerId", "");
+               final String OwnerID = sharedPreferences.getString("OwnerId", "");
                final String projectID = sharedPreferences.getString("ProjectId", "");
                FirebaseAuth auth = FirebaseAuth.getInstance();
                FirebaseUser firebaseUser = auth.getCurrentUser();
@@ -82,6 +83,12 @@ public class BidAdapter extends RecyclerView.Adapter<BidAdapter.ViewHolder> {
                            final HashMap<String, Object> hashMap = new HashMap<>();
                            hashMap.put("isAccepted", "true");
                            hashMap.put("isVisible", "false");
+                           hashMap.put("freelancer", bid.getBidderId());
+
+
+                           //add notification for the bidder to tell him that his bid was accepted
+                           addNotification(bid.getBidderId(), OwnerID, bid.getProjectId(), bid.getId());
+
                            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                                     firebaseDatabase
                                    .getReference("Project")
@@ -108,8 +115,6 @@ public class BidAdapter extends RecyclerView.Adapter<BidAdapter.ViewHolder> {
                return true;
            }
        });
-
-
     }
 
     @Override
@@ -130,5 +135,20 @@ public class BidAdapter extends RecyclerView.Adapter<BidAdapter.ViewHolder> {
             description = itemView.findViewById(R.id.description);
             profile_image = itemView.findViewById(R.id.profile_img);
         }
+    }
+
+    private void addNotification(String bidderID, String publisher, String projectID, String bidId){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(bidderID);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("userID", publisher);
+        hashMap.put("title", "bid accepted");
+        hashMap.put("text", "your bid has been accepted");
+        hashMap.put("projectID", projectID);
+        hashMap.put("ownerID", publisher);
+        hashMap.put("notifyType", "projectAccepted");
+        hashMap.put("bidId", bidId);
+
+        reference.push().setValue(hashMap);
     }
 }

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.vworld_project.Activity.AcceptedProjectActivity;
 import com.example.vworld_project.Activity.ProjectActivity;
 import com.example.vworld_project.Model.Notification;
 import com.example.vworld_project.Model.User;
@@ -51,19 +52,43 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.title.setText(notification.getTitle());
         holder.text.setText(notification.getText());
 
-        getUserInfo(holder.profile_image, notification.getUserID());
+        if (notification.getNotifyType().equals("newBid")){
+            getUserInfo(holder.profile_image, notification.getUserID());
+        } else {
+            holder.profile_image.setImageResource(R.drawable.notify);
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, ProjectActivity.class);
-                intent.putExtra("projectid", notification.getProjectID());
-                intent.putExtra("OwnerId", notification.getOwnerID());
-                mContext.startActivity(intent);
+
+                if (notification.getNotifyType().equals("newBid")){
+                    Intent intent = new Intent(mContext, ProjectActivity.class);
+                    intent.putExtra("projectid", notification.getProjectID());
+                    intent.putExtra("OwnerId", notification.getOwnerID());
+                    mContext.startActivity(intent);
+                } else if (notification.getNotifyType().equals("projectAccepted")){
+                    Intent intent = new Intent(mContext, AcceptedProjectActivity.class);
+                    intent.putExtra("projectOwnerId", notification.getOwnerID());
+                    intent.putExtra("projectid", notification.getProjectID());
+                    intent.putExtra("bidId", notification.getBidId());
+                    mContext.startActivity(intent);
+                } else if (notification.getNotifyType().equals("readyProject")){
+                    Intent intent = new Intent(mContext, AcceptedProjectActivity.class);
+                    intent.putExtra("projectOwnerId", notification.getOwnerID());
+                    intent.putExtra("projectid", notification.getProjectID());
+                    intent.putExtra("bidId", notification.getBidId());
+                    mContext.startActivity(intent);
+                } else if (notification.getNotifyType().equals("completedProject")){
+                    Intent intent = new Intent(mContext, AcceptedProjectActivity.class);
+                    intent.putExtra("projectOwnerId", notification.getOwnerID());
+                    intent.putExtra("projectid", notification.getProjectID());
+                    intent.putExtra("bidId", notification.getBidId());
+                    mContext.startActivity(intent);
+                }
+
             }
         });
-
-
 
     }
     //

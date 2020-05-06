@@ -29,7 +29,7 @@
             android:id="@+id/period_project"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/time"
+            android:drawableStart="@drawable/time"
             android:text=" closes in n days"
             android:textSize="16sp"
             android:textColor="#000"
@@ -40,13 +40,13 @@
             android:id="@+id/bids"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/bids"
+            android:drawableStart="@drawable/bids"
             android:layout_marginTop="10dp"
             android:layout_marginStart="35dp"
             android:text=" n bids"
             android:textColor="#000"
             android:textSize="16sp"
-            android:layout_toRightOf="@id/period_project"
+            android:layout_toEndOf="@id/period_project"
             android:layout_below="@id/project_title"/>
 
 
@@ -59,7 +59,7 @@
             android:layout_below="@id/period_project"
             android:layout_marginTop="10dp"
             android:textSize="16sp"
-            android:drawableLeft="@drawable/dollar"/>
+            android:drawableStart="@drawable/dollar"/>
 
 
     </RelativeLayout>

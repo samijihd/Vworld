@@ -7,15 +7,17 @@ public class Notification {
     private String text;
     private String projectID;
     private String ownerID;
-    private String isProject;
+    private String notifyType;
+    private String bidId;
 
-    public Notification(String userID, String title, String text, String projectID, String ownerID, String isProject) {
+    public Notification(String userID, String title, String text, String projectID, String ownerID, String notifyType, String bidId) {
         this.userID = userID;
         this.title = title;
         this.text = text;
         this.projectID = projectID;
         this.ownerID = ownerID;
-        this.isProject = isProject;
+        this.notifyType = notifyType;
+        this.bidId = bidId;
     }
 
     public Notification() {
@@ -61,11 +63,19 @@ public class Notification {
         this.ownerID = ownerID;
     }
 
-    public String getIsProject() {
-        return isProject;
+    public String getNotifyType() {
+        return notifyType;
     }
 
-    public void setIsProject(String isProject) {
-        this.isProject = isProject;
+    public void setNotifyType(String notifyType) {
+        this.notifyType = notifyType;
+    }
+
+    public String getBidId() {
+        return bidId;
+    }
+
+    public void setBidId(String bidId) {
+        this.bidId = bidId;
     }
 }

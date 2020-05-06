@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_centerVertical="true"
+        android:id="@+id/profile_img"
+        android:layout_margin="5dp"/>
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="username"
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:layout_toEndOf="@id/profile_img"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"/>
+    <RatingBar
+        style = "?android:attr/ratingBarStyleSmall"
+        android:id="@+id/rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleY="1.7"
+        android:scaleX="1.1"
+        android:layout_below="@id/name"
+        android:layout_toEndOf="@id/profile_img"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:theme="@style/RatingBar"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bif_comment"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:scrollbars="vertical"
+        android:gravity="top|left"
+        android:layout_below="@id/header"/>
+
+
+</RelativeLayout>

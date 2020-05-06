@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,7 +62,6 @@ public class  AccountFragment extends Fragment {
 
     private CircleImageView profile_image1;
     private TextView username, name, jobtitle, address;
-    private Button editProfile;
 
     private FirebaseAuth auth;
     private FirebaseUser firebaseUser;
@@ -86,6 +86,10 @@ public class  AccountFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
         // tab layout // ******************************************************
 
+        RatingBar ratingBar = viewGroup.findViewById(R.id.rating);
+        ratingBar.setEnabled(false);
+
+
         ImageView signout = viewGroup.findViewById(R.id.signoutID);
         profile_image1 = viewGroup.findViewById(R.id.profile_img);
         username = viewGroup.findViewById(R.id.username);
@@ -93,7 +97,7 @@ public class  AccountFragment extends Fragment {
         jobtitle = viewGroup.findViewById(R.id.job_title);
         address = viewGroup.findViewById(R.id.address);
 
-        editProfile = viewGroup.findViewById(R.id.edit_profile);
+        Button editProfile = viewGroup.findViewById(R.id.edit_profile);
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -15,8 +15,12 @@ public class Project {
     private String skill;
     private String isAccepted;
     private String isVisible;
+    private String finishedWork;
+    private String completed;
+    private String freelancer;
+    private String rated;
 
-    public Project(String id, String projectid, String ownerid, String type, String title, String description, String time, String bids, String bidno, String budget, String skill, String isAccepted, String isVisible) {
+    public Project(String id, String projectid, String ownerid, String type, String title, String description, String time, String bids, String bidno, String budget, String skill, String isAccepted, String isVisible, String finishedWork, String completed, String freelancer, String rated) {
         this.id = id;
         this.projectid = projectid;
         this.ownerid = ownerid;
@@ -30,6 +34,10 @@ public class Project {
         this.skill = skill;
         this.isAccepted = isAccepted;
         this.isVisible = isVisible;
+        this.finishedWork = finishedWork;
+        this.completed = completed;
+        this.freelancer = freelancer;
+        this.rated = rated;
     }
 
     public Project(){
@@ -138,5 +146,37 @@ public class Project {
 
     public void setIsVisible(String isVisible) {
         this.isVisible = isVisible;
+    }
+
+    public String getFinishedWork() {
+        return finishedWork;
+    }
+
+    public void setFinishedWork(String finishedWork) {
+        this.finishedWork = finishedWork;
+    }
+
+    public String getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(String completed) {
+        this.completed = completed;
+    }
+
+    public String getFreelancer() {
+        return freelancer;
+    }
+
+    public void setFreelancer(String freelancer) {
+        this.freelancer = freelancer;
+    }
+
+    public String getRated() {
+        return rated;
+    }
+
+    public void setRated(String rated) {
+        this.rated = rated;
     }
 }
